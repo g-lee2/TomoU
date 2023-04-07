@@ -1132,6 +1132,16 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.37.0.tgz#cf1b5fa24217fe007f6487a26d765274925efa7d"
   integrity sha512-x5vzdtOOGgFVDCUs81QRB2+liax8rFg3+7hqM+QhBG0/G3F1ZsoYl97UrqgHgQ9KKT7G6c4V+aTUCgu/n22v1A==
 
+"@expo-google-fonts/kosugi-maru@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/kosugi-maru/-/kosugi-maru-0.2.3.tgz#e051f441c20d7ffd699bf35a2e8fea32794d2468"
+  integrity sha512-JJypkG/FF2NjBAXS7lyee3bX9B2SRTgloUDYpwYDkHl1S7oke4usev/JTXF385dBu4obOQhEHy2bvenf2/tGTw==
+
+"@expo-google-fonts/lato@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/lato/-/lato-0.2.3.tgz#32456b5c49d9f84d2b22ecfa8f50027555439e9c"
+  integrity sha512-X56FEZn2GNYtI2/UqyOps7TShuDwi/k9JKa7VzM0x2ywBOnhTtXGq2IsZyNPzT9KnQA/ID84F9yiMS8e3obu0g==
+
 "@expo/bunyan@4.0.0", "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@expo/bunyan/-/bunyan-4.0.0.tgz#be0c1de943c7987a9fbd309ea0b1acd605890c7b"
