@@ -53,21 +53,19 @@ const screenOptions = ({ route }) => {
     tabBarIcon: ({ color, size }) => (
       <Ionicons name={iconName} size={size} color={color} />
     ),
+    tabBarOptions: {
+      activeTintColor: `${(props) => props.theme.colors.brandBlue.primary}`,
+      inactiveTintColot: `${(props) => props.theme.colors.ui.secondary}`,
+    },
   };
 };
 
 const Tab = createBottomTabNavigator();
 
-export const Tabs = () => {
+export const Navigation = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={screenOptions}
-        tabBarOptions={{
-          activeTintColor: "blue",
-          inactiveTintColot: "gray",
-        }}
-      >
+      <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen name="Profile" component={ProfileTab} />
         <Tab.Screen name="Search" component={SearchTab} />
         <Tab.Screen name="Study" component={StudyTab} />
