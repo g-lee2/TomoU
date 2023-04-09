@@ -29,6 +29,12 @@ This application is a platform for Japanese language learners to meet other Japa
 
 - _No known bugs as of now_
 
+## Research & Planning Log
+
+#### Sunday, 04/09
+
+- 1:20-2:05: Research react native authentication with firebase and expo
+
 ## `License`
 
 MIT License
