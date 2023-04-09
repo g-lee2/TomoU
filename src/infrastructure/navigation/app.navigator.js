@@ -1,40 +1,11 @@
 import React from "react";
-import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-
-const ProfileTab = () => {
-  return (
-    <View>
-      <Text>Profile</Text>
-    </View>
-  );
-};
-
-const SearchTab = () => {
-  return (
-    <View>
-      <Text>Search</Text>
-    </View>
-  );
-};
-
-const StudyTab = () => {
-  return (
-    <View>
-      <Text>Study</Text>
-    </View>
-  );
-};
-
-const EventsTab = () => {
-  return (
-    <View>
-      <Text>Events</Text>
-    </View>
-  );
-};
+import { EventsTab } from "./events.navigator";
+import { ProfileTab } from "./profile.navigator";
+import { SearchTab } from "./search.navigator";
+import { StudyTab } from "./study.navigator";
 
 const screenOptions = ({ route }) => {
   let iconName;
@@ -66,10 +37,10 @@ export const Navigation = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name="Profile" component={ProfileTab} />
+        <Tab.Screen name="Events" component={EventsTab} />
         <Tab.Screen name="Search" component={SearchTab} />
         <Tab.Screen name="Study" component={StudyTab} />
-        <Tab.Screen name="Events" component={EventsTab} />
+        <Tab.Screen name="Profile" component={ProfileTab} />
       </Tab.Navigator>
     </NavigationContainer>
   );

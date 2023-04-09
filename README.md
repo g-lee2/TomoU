@@ -1,12 +1,12 @@
 # TomoU
 
-#### By Grace Lee
+#### `By Grace Lee`
 
-#### Brief Description of Application
+#### `Brief Description of Application`
 
 This application is a platform for Japanese language learners to meet other Japanese language enthusiasts and share resources with each other.
 
-## Technologies Used
+## `Technologies Used`
 
 - _React Native_
 - _Expo_
@@ -15,15 +15,21 @@ This application is a platform for Japanese language learners to meet other Japa
 - _React Navigation_
 - _Firestore/Firebase_
 
-## Description
+## `Description`
 
-This is an application...
+- This is an application where users users can create an account and log in to the app, enabling them to access the language exchange features and view their profile information. Users can edit their profiles, including information such as their name, profile picture, language level, and language exchange interests.
 
-## Known Bugs
+- Users will be able to create flashcards for vocabulary words they encounter while reading books in their target language. Users can add definitions, example sentences, and other information to the flashcards. They can choose to share their flashcard list with other users in the app as well.
+
+- Users will be able to search for other language learners based on their language schools or study abroad universities. Users can filter search results by school name, location, and other criteria.
+
+- Users will also be able to create a calendar of language exchange events, such as language exchange meetups, language exchange dinners, or language exchange workshops. Users could RSVP to attend events and connect with other language learners in person.
+
+## `Known Bugs`
 
 - _No known bugs as of now_
 
-## License
+## `License`
 
 MIT License
 
