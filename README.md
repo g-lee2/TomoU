@@ -29,7 +29,7 @@ This application is a platform for Japanese language learners to meet other Japa
 
 - _No known bugs as of now_
 
-## Research & Planning Log
+## `Research & Planning Log`
 
 #### Sunday, 04/09
 
