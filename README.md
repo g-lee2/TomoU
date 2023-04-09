@@ -34,6 +34,7 @@ This application is a platform for Japanese language learners to meet other Japa
 #### Sunday, 04/09
 
 - 1:20-2:05: Research react native authentication with firebase and expo
+- 2:08-2:57: Research react native/react native paper components and how chip component works
 
 ## `License`
 

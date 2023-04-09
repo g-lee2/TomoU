@@ -1,10 +1,18 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Avatar } from "react-native-paper";
+import styled from "styled-components";
+
+const ProfilePicView = styled.View`
+  align-self: center;
+  margin: 20px;
+`;
 
 export const ProfileTab = () => {
   return (
-    <View>
-      <Text>Profile</Text>
-    </View>
+    <>
+      <ProfilePicView>
+        <Avatar.Icon size={40} icon="account" />
+      </ProfilePicView>
+    </>
   );
 };
