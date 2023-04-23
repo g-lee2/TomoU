@@ -11,7 +11,7 @@ export const ProfileTab = () => {
   return (
     <>
       <ProfilePicView>
-        <Avatar.Icon size={40} icon="account" />
+        <Avatar.Icon size={80} icon="account" />
       </ProfilePicView>
     </>
   );
