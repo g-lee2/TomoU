@@ -40,6 +40,10 @@ This application is a platform for Japanese language learners to meet other Japa
 
 - 5:10-5:43: Research designing database for social media + model relational data in Firestore
 
+#### Monday, 04/24
+
+- 12:10-1:04: Research state management using context API
+
 ## `License`
 
 MIT License
