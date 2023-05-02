@@ -33,7 +33,7 @@ const screenOptions = ({ route }) => {
 
 const Tab = createBottomTabNavigator();
 
-export const Navigation = () => {
+export const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOptions}>
