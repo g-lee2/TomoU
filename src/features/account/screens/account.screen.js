@@ -2,15 +2,16 @@ import React from "react";
 import { Text } from "react-native";
 import styled from "styled-components";
 import { Button } from "react-native-paper";
+import { CenteredContainer } from "../components/account.styles";
 
-export const AccountContainer = styled.View`
+const AccountContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.8);
   padding: ${(props) => props.theme.space[4]};
   margin-top: ${(props) => props.theme.space[2]};
   width: 80%;
 `;
 
-export const AuthButton = styled(Button)`
+const AuthButton = styled(Button)`
   padding: ${(props) => props.theme.space[2]};
   border-radius: 4px;
   background-color: ${(props) => props.theme.colors.brandBlue.primary};
@@ -18,7 +19,7 @@ export const AuthButton = styled(Button)`
 
 export const AccountScreen = ({ navigation }) => {
   return (
-    <>
+    <CenteredContainer>
       <Text>TomoU</Text>
       <AccountContainer>
         <AuthButton
@@ -38,6 +39,6 @@ export const AccountScreen = ({ navigation }) => {
           Register
         </AuthButton>
       </AccountContainer>
-    </>
+    </CenteredContainer>
   );
 };
