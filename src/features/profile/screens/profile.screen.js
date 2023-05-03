@@ -1,11 +1,26 @@
 import React from "react";
-import { Text } from "react-native";
-import { Avatar, Badge } from "react-native-paper";
+import { Text, TouchableOpacity, ScrollView, View } from "react-native";
+import { Avatar, Badge, List } from "react-native-paper";
 import styled from "styled-components";
 
-const ProfilePicView = styled.View`
+const ProfileView = styled.View`
   align-self: center;
-  margin: 20px;
+`;
+
+const ButtonContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-horizontal: 10px;
+`;
+
+const Buttons = styled(TouchableOpacity)`
+  border-width: 1px;
+  border-radius: 3px;
+  height: 25px;
+  justify-content: center;
+  padding: 3px;
 `;
 
 const colorBadges = (props) => {
@@ -27,23 +42,57 @@ const StyledBadge = styled(Badge)`
   background-color: ${colorBadges};
 `;
 
+const BadgeContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ProfileTab = () => {
   return (
     <>
-      <ProfilePicView>
-        <Avatar.Icon size={80} icon="account" />
-        <Text>Tony August</Text>
-        <Text>Logout</Text>
-        <Text>Edit</Text>
-        <StyledBadge>JLPT N1</StyledBadge>
-        <StyledBadge>Lives in Japan</StyledBadge>
-        <StyledBadge>JLPT textbooks</StyledBadge>
-        <StyledBadge>Books I read</StyledBadge>
-        <StyledBadge>Goals</StyledBadge>
-        <StyledBadge>Playlist</StyledBadge>
-        <StyledBadge>Shows</StyledBadge>
-        <StyledBadge>Movies</StyledBadge>
-      </ProfilePicView>
+      <ButtonContainer>
+        <Buttons>
+          <Text>Edit</Text>
+        </Buttons>
+        <Buttons>
+          <Text>Logout</Text>
+        </Buttons>
+      </ButtonContainer>
+      <View>
+        <ProfileView>
+          <Avatar.Icon size={80} icon="account" />
+          <Text>Tony August</Text>
+        </ProfileView>
+        <ProfileView>
+          <Text>Goals: Pass N1 July 2023</Text>
+        </ProfileView>
+        <BadgeContainer>
+          <StyledBadge>JLPT N1</StyledBadge>
+          <StyledBadge>&#x1F4CD; Japan</StyledBadge>
+        </BadgeContainer>
+      </View>
+      <ScrollView>
+        <List.Section title="Resources">
+          <List.Accordion title="JLPT Textbooks">
+            <List.Item title="Shin Kanzen Master" />
+            <List.Item title="Sou Matome" />
+          </List.Accordion>
+          <List.Accordion title="Books I Read">
+            <List.Item title="満月珈琲店 1" />
+            <List.Item title="満月珈琲店 2" />
+          </List.Accordion>
+          <List.Accordion title="Songs/Artists">
+            <List.Item title="Aimyon" />
+            <List.Item title="Radwimps" />
+          </List.Accordion>
+          <List.Accordion title="Shows/Movies">
+            <List.Item title="One Piece" />
+            <List.Item title="Demon Slayer" />
+            <List.Item title="Naruto" />
+          </List.Accordion>
+        </List.Section>
+      </ScrollView>
     </>
   );
 };
