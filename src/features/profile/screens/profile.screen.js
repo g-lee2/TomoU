@@ -1,5 +1,11 @@
 import React from "react";
-import { Text, TouchableOpacity, ScrollView, View } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  View,
+  SafeAreaView,
+} from "react-native";
 import { Avatar, Badge, List } from "react-native-paper";
 import styled from "styled-components";
 
@@ -50,7 +56,7 @@ const BadgeContainer = styled.View`
 
 export const ProfileTab = () => {
   return (
-    <>
+    <SafeAreaView>
       <ButtonContainer>
         <Buttons>
           <Text>Edit</Text>
@@ -93,6 +99,6 @@ export const ProfileTab = () => {
           </List.Accordion>
         </List.Section>
       </ScrollView>
-    </>
+    </SafeAreaView>
   );
 };
