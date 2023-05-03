@@ -2,10 +2,10 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { EventsTab } from "./events.navigator";
-import { ProfileTab } from "./profile.navigator";
-import { SearchTab } from "./search.navigator";
-import { StudyTab } from "./study.navigator";
+import { EventsTab } from "../../features/events/screens/events.screen";
+import { ProfileTab } from "../../features/profile/screens/profile.screen";
+import { SearchTab } from "../../features/search/screens/search.screen";
+import { StudyTab } from "../../features/study/screens/study.screen";
 
 const screenOptions = ({ route }) => {
   let iconName;

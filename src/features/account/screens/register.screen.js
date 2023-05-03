@@ -13,8 +13,8 @@ export const RegisterScreen = ({ navigation }) => {
   const [repeatedPassword, setRepeatedPassword] = useState("");
   return (
     <CenteredContainer>
-      <Text>TomoU</Text>
       <AccountContainer>
+        <Text>TomoU</Text>
         <Icon name="angle-left" size={30} onPress={() => navigation.goBack()} />
         <TextInput
           label="Email"

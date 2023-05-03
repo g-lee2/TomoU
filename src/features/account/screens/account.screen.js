@@ -20,10 +20,10 @@ const AuthButton = styled(Button)`
 export const AccountScreen = ({ navigation }) => {
   return (
     <CenteredContainer>
-      <Text>TomoU</Text>
       <AccountContainer>
+        <Text>TomoU</Text>
         <AuthButton
-          icon="lock-open-outline"
+          icon="login"
           mode="contained"
           color="blue"
           onPress={() => navigation.navigate("Login")}
