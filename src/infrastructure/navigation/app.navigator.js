@@ -5,7 +5,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { EventsTab } from "../../features/events/screens/events.screen";
 import { StudyStackNavigator } from "./study.navigator";
 import { SearchTab } from "../../features/search/screens/search.screen";
-import { StudyTab } from "../../features/study/screens/study.screen";
 import { ProfileTab } from "../../features/profile/screens/profile.screen";
 
 const screenOptions = ({ route }) => {
