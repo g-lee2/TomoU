@@ -11,12 +11,14 @@ const Buttons = styled(TouchableOpacity)`
   align-items: center;
 `;
 
-export const NewList = () => {
+export const NewList = ({ navigation }) => {
   return (
     <View>
       <TextInput placeholder="Title" />
       <Buttons>
-        <Text>Create New List</Text>
+        <Text onPress={() => navigation.navigate("Lists")}>
+          Create New List
+        </Text>
       </Buttons>
     </View>
   );

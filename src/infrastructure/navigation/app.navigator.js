@@ -3,9 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { EventsTab } from "../../features/events/screens/events.screen";
-import { ProfileStackNavigator } from "./study.navigator";
+import { StudyStackNavigator } from "./study.navigator";
 import { SearchTab } from "../../features/search/screens/search.screen";
 import { StudyTab } from "../../features/study/screens/study.screen";
+import { ProfileTab } from "../../features/profile/screens/profile.screen";
 
 const screenOptions = ({ route }) => {
   let iconName;
@@ -39,8 +40,8 @@ export const AppNavigator = () => {
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen name="Events" component={EventsTab} />
         <Tab.Screen name="Search" component={SearchTab} />
-        <Tab.Screen name="Study" component={StudyTab} />
-        <Tab.Screen name="Profile" component={ProfileStackNavigator} />
+        <Tab.Screen name="Study" component={StudyStackNavigator} />
+        <Tab.Screen name="Profile" component={ProfileTab} />
       </Tab.Navigator>
     </NavigationContainer>
   );
