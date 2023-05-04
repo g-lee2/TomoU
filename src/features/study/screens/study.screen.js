@@ -1,10 +1,13 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
-export const StudyTab = () => {
+export const StudyTab = ({ navigation }) => {
   return (
     <View>
-      <Text>Study</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("NewList")}>
+        <Icon name="plus" size={24} color="#000" />
+      </TouchableOpacity>
     </View>
   );
 };

@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { EventsTab } from "../../features/events/screens/events.screen";
-import { ProfileTab } from "../../features/profile/screens/profile.screen";
+import { ProfileStackNavigator } from "./study.navigator";
 import { SearchTab } from "../../features/search/screens/search.screen";
 import { StudyTab } from "../../features/study/screens/study.screen";
 
@@ -40,7 +40,7 @@ export const AppNavigator = () => {
         <Tab.Screen name="Events" component={EventsTab} />
         <Tab.Screen name="Search" component={SearchTab} />
         <Tab.Screen name="Study" component={StudyTab} />
-        <Tab.Screen name="Profile" component={ProfileTab} />
+        <Tab.Screen name="Profile" component={ProfileStackNavigator} />
       </Tab.Navigator>
     </NavigationContainer>
   );
