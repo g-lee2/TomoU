@@ -6,7 +6,7 @@ import {
   View,
   SafeAreaView,
 } from "react-native";
-import { Avatar, Badge, List } from "react-native-paper";
+import { Avatar, Chip, List } from "react-native-paper";
 import styled from "styled-components";
 
 const ProfileView = styled.View`
@@ -29,7 +29,7 @@ const Buttons = styled(TouchableOpacity)`
   padding: 3px;
 `;
 
-const colorBadges = (props) => {
+const colorChips = (props) => {
   const randomNumb = Math.floor(Math.random() * 4);
   let color;
   if (randomNumb === 0) {
@@ -44,11 +44,11 @@ const colorBadges = (props) => {
   return color;
 };
 
-const StyledBadge = styled(Badge)`
-  background-color: ${colorBadges};
+const StyledChip = styled(Chip)`
+  background-color: ${colorChips};
 `;
 
-const BadgeContainer = styled.View`
+const ChipContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -73,10 +73,10 @@ export const ProfileTab = () => {
         <ProfileView>
           <Text>Goals: Pass N1 July 2023</Text>
         </ProfileView>
-        <BadgeContainer>
-          <StyledBadge>JLPT N1</StyledBadge>
-          <StyledBadge>&#x1F4CD; Japan</StyledBadge>
-        </BadgeContainer>
+        <ChipContainer>
+          <StyledChip>JLPT N1</StyledChip>
+          <StyledChip>&#x1F4CD; Japan</StyledChip>
+        </ChipContainer>
       </View>
       <ScrollView>
         <List.Section title="Resources">
