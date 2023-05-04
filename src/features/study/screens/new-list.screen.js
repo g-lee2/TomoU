@@ -15,10 +15,8 @@ export const NewList = ({ navigation }) => {
   return (
     <View>
       <TextInput placeholder="Title" />
-      <Buttons>
-        <Text onPress={() => navigation.navigate("Lists")}>
-          Create New List
-        </Text>
+      <Buttons onPress={() => navigation.navigate("Lists")}>
+        <Text>Create New List</Text>
       </Buttons>
     </View>
   );

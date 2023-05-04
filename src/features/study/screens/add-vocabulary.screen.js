@@ -17,10 +17,8 @@ export const NewVocab = ({ navigation }) => {
     <View>
       <TextInput placeholder="Vocabulary" />
       <TextInput placeholder="Definition" />
-      <Buttons>
-        <Text onPress={() => navigation.navigate("ListDetails")}>
-          Add Vocab
-        </Text>
+      <Buttons onPress={() => navigation.navigate("List Details")}>
+        <Text>Add Vocab</Text>
       </Buttons>
     </View>
   );

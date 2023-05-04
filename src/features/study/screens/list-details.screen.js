@@ -5,8 +5,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 export const ListDetails = ({ navigation }) => {
   return (
     <View>
-      <TouchableOpacity onPress={() => navigation.navigate("NewVocab")}>
-        <Icon name="plus" size={24} color="#000" />
+      <TouchableOpacity onPress={() => navigation.navigate("Add New Vocab")}>
+        <Icon name="plus-circle" size={40} color="#000" />
       </TouchableOpacity>
     </View>
   );

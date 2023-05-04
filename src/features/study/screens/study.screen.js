@@ -7,15 +7,17 @@ export const StudyTab = ({ navigation }) => {
   return (
     <>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate("NewList")}>
-          <Icon name="plus" size={24} color="#000" />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Create New List")}
+        >
+          <Icon name="plus-circle" size={40} color="#000" />
         </TouchableOpacity>
       </View>
       <View>
-        <List.Section title="Resources">
+        <List.Section>
           <List.Item
             title="Shin Kanzen Master"
-            onPress={() => navigation.navigate("ListDetails")}
+            onPress={() => navigation.navigate("List Details")}
           />
         </List.Section>
       </View>
