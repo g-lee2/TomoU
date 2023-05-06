@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 import { Avatar, Chip, List } from "react-native-paper";
 import styled from "styled-components";
@@ -14,7 +15,6 @@ const ProfileView = styled.View`
 `;
 
 const ButtonContainer = styled.View`
-  flex: 1;
   flex-direction: row;
   justify-content: space-between;
   padding-top: 10px;
@@ -27,6 +27,11 @@ const Buttons = styled(TouchableOpacity)`
   height: 25px;
   justify-content: center;
   padding: 3px;
+`;
+
+const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `;
 
 const colorChips = (props) => {
@@ -52,11 +57,12 @@ const ChipContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-bottom: 6px;
 `;
 
 export const ProfileTab = () => {
   return (
-    <SafeAreaView>
+    <SafeArea>
       <ButtonContainer>
         <Buttons>
           <Text>Edit</Text>
@@ -65,19 +71,17 @@ export const ProfileTab = () => {
           <Text>Logout</Text>
         </Buttons>
       </ButtonContainer>
-      <View>
-        <ProfileView>
-          <Avatar.Icon size={80} icon="account" />
-          <Text>Tony August</Text>
-        </ProfileView>
-        <ProfileView>
-          <Text>Goals: Pass N1 July 2023</Text>
-        </ProfileView>
-        <ChipContainer>
-          <StyledChip>JLPT N1</StyledChip>
-          <StyledChip>&#x1F4CD; Japan</StyledChip>
-        </ChipContainer>
-      </View>
+      <ProfileView>
+        <Avatar.Icon size={80} icon="account" />
+        <Text>Tony August</Text>
+      </ProfileView>
+      <ProfileView>
+        <Text>Goals: Pass N1 July 2023</Text>
+      </ProfileView>
+      <ChipContainer>
+        <StyledChip>JLPT N1</StyledChip>
+        <StyledChip>&#x1F4CD; Japan</StyledChip>
+      </ChipContainer>
       <ScrollView>
         <List.Section title="Resources">
           <List.Accordion title="JLPT Textbooks">
@@ -99,6 +103,6 @@ export const ProfileTab = () => {
           </List.Accordion>
         </List.Section>
       </ScrollView>
-    </SafeAreaView>
+    </SafeArea>
   );
 };
