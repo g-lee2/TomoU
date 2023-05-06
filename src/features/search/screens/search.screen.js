@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import { Searchbar, Chip } from "react-native-paper";
 import styled from "styled-components";
+import { InstituteInfoCard } from "../components/institute-info-card.component";
 
 const SearchBar = styled(Searchbar)`
   border-radius: 0;
@@ -19,6 +26,11 @@ const ChipSpaced = styled(Chip)`
   margin: 5px;
 `;
 
+const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
+`;
+
 export const SearchTab = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -26,7 +38,7 @@ export const SearchTab = () => {
   console.log(searchQuery);
 
   return (
-    <View>
+    <SafeArea>
       <SearchBar
         placeholder="Search"
         onChangeText={onChangeSearch}
@@ -52,6 +64,11 @@ export const SearchTab = () => {
           </TouchableOpacity>
         </ScrollView>
       </ChipContainer>
-    </View>
+      <ScrollView>
+        <InstituteInfoCard />
+        <InstituteInfoCard />
+        <InstituteInfoCard />
+      </ScrollView>
+    </SafeArea>
   );
 };

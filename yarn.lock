@@ -1154,7 +1154,7 @@
 
 "@expo-google-fonts/lato@^0.2.3":
   version "0.2.3"
-  resolved "https://registry.npmjs.org/@expo-google-fonts/lato/-/lato-0.2.3.tgz"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/lato/-/lato-0.2.3.tgz#32456b5c49d9f84d2b22ecfa8f50027555439e9c"
   integrity sha512-X56FEZn2GNYtI2/UqyOps7TShuDwi/k9JKa7VzM0x2ywBOnhTtXGq2IsZyNPzT9KnQA/ID84F9yiMS8e3obu0g==
 
 "@expo/bunyan@4.0.0", "@expo/bunyan@^4.0.0":
@@ -4203,7 +4203,7 @@ expo-file-system@~15.2.0, expo-file-system@~15.2.2:
   dependencies:
     uuid "^3.4.0"
 
-expo-font@~11.1.1:
+expo-font@^11.1.1, expo-font@~11.1.1:
   version "11.1.1"
   resolved "https://registry.npmjs.org/expo-font/-/expo-font-11.1.1.tgz"
   integrity sha512-X+aICqYY69hiiDDtcNrjq8KutHrH2TrHuMqk0Rfq0P7hF6hMd+YefwLBNkvIrqrgmTAuqiLjMUwj2rHLqmgluw==
