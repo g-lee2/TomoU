@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text } from "react-native";
-import { TextInput } from "react-native-paper";
+import { TextInput, ActivityIndicator, MD2Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {
   CenteredContainer,
   AccountContainer,
+  AuthButton,
 } from "../components/account.styles";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
+  const { onRegister, error, isLoading } = useContext(AuthenticationContext);
+
   return (
     <CenteredContainer>
       <AccountContainer>
@@ -40,6 +44,22 @@ export const RegisterScreen = ({ navigation }) => {
           autoCapitalize="none"
           onChangeText={(p) => setRepeatedPassword(p)}
         />
+        {error && <Text>{error}</Text>}
+        {!isLoading ? (
+          <AuthButton
+            icon="email"
+            mode="contained"
+            color="blue"
+            onPress={() => onRegister(email, password, repeatedPassword)}
+          >
+            Register
+          </AuthButton>
+        ) : (
+          <ActivityIndicator animating={true} color={MD2Colors.blue300} />
+        )}
+        <AuthButton mode="contained" onPress={() => navigation.goBack()}>
+          Back
+        </AuthButton>
       </AccountContainer>
     </CenteredContainer>
   );

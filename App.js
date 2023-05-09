@@ -33,9 +33,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <SafeArea>
-            <Navigation />
-          </SafeArea>
+          <Navigation />
         </AuthenticationContextProvider>
       </ThemeProvider>
       <StatusBar style="auto" />

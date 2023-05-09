@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useReducer } from "react";
 import { Text, ScrollView } from "react-native";
 import { Avatar, List } from "react-native-paper";
 import {
@@ -9,8 +9,11 @@ import {
   StyledChip,
   ChipContainer,
 } from "../components/profile.styles";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 export const ProfileTab = () => {
+  const { onLogout } = useContext(AuthenticationContext);
+
   return (
     <SafeArea>
       <ButtonContainer>
@@ -18,7 +21,7 @@ export const ProfileTab = () => {
           <Text>Edit</Text>
         </Buttons>
         <Buttons>
-          <Text>Logout</Text>
+          <Text onPress={onLogout}>Logout</Text>
         </Buttons>
       </ButtonContainer>
       <ProfileView>

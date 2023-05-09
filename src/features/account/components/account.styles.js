@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "react-native-paper";
 
 export const CenteredContainer = styled.View`
   flex: 1;
@@ -11,4 +12,10 @@ export const AccountContainer = styled.View`
   padding: ${(props) => props.theme.space[4]};
   margin-top: ${(props) => props.theme.space[2]};
   width: 80%;
+`;
+
+export const AuthButton = styled(Button)`
+  padding: ${(props) => props.theme.space[2]};
+  border-radius: 4px;
+  background-color: ${(props) => props.theme.colors.brandBlue.primary};
 `;

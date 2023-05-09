@@ -35,13 +35,11 @@ const Tab = createBottomTabNavigator();
 
 export const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name="Events" component={EventsTab} />
-        <Tab.Screen name="Search" component={SearchTab} />
-        <Tab.Screen name="Study" component={StudyStackNavigator} />
-        <Tab.Screen name="Profile" component={ProfileTab} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator screenOptions={screenOptions}>
+      <Tab.Screen name="Events" component={EventsTab} />
+      <Tab.Screen name="Search" component={SearchTab} />
+      <Tab.Screen name="Study" component={StudyStackNavigator} />
+      <Tab.Screen name="Profile" component={ProfileTab} />
+    </Tab.Navigator>
   );
 };
