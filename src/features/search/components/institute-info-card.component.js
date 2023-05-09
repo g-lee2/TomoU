@@ -7,17 +7,13 @@ import {
   Info,
 } from "./info-card-styles.component";
 
-export const InstituteInfoCard = () => {
+export const InstituteInfoCard = ({ name, address, image }) => {
   return (
     <InstituteCard elevation={5}>
-      <InstituteCardCardCover
-        source={require("../../../../assets/akamonkai.jpeg")}
-      />
+      <InstituteCardCardCover source={{ uri: image }} />
       <Info>
-        <Text>Akamonkai</Text>
-        <Address>
-          2 Chome-54-4 Nishinippori, Arakawa City, Tokyo 116-0013, Japan
-        </Address>
+        <Text>{name}</Text>
+        <Address>{address}</Address>
       </Info>
     </InstituteCard>
   );

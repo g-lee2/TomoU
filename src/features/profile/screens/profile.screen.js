@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext } from "react";
 import { Text, ScrollView } from "react-native";
 import { Avatar, List } from "react-native-paper";
 import {
