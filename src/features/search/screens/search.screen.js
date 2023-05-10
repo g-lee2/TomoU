@@ -6,6 +6,7 @@ import {
   ChipContainer,
   ChipSpaced,
   SafeArea,
+  ResetChip,
 } from "../components/search.styles";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../../firebase-config";
@@ -68,42 +69,30 @@ export const SearchTab = () => {
       <ChipContainer>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <TouchableOpacity>
-            <ChipSpaced
-              onPress={() => handleChipPress("Kanto")}
-              selected={selectedChip === "Kanto"}
-            >
+            <ResetChip onPress={() => handleChipPress(null)}>Reset</ResetChip>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <ChipSpaced onPress={() => handleChipPress("Kanto")}>
               Kanto
             </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced
-              onPress={() => handleChipPress("Kansai")}
-              selected={selectedChip === "Kansai"}
-            >
+            <ChipSpaced onPress={() => handleChipPress("Kansai")}>
               Kansai
             </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced
-              onPress={() => handleChipPress("Kyushu")}
-              selected={selectedChip === "Kyushu"}
-            >
+            <ChipSpaced onPress={() => handleChipPress("Kyushu")}>
               Kyushu
             </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced
-              onPress={() => handleChipPress("Hokkaido")}
-              selected={selectedChip === "Hokkaido"}
-            >
+            <ChipSpaced onPress={() => handleChipPress("Hokkaido")}>
               Hokkaido
             </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced
-              onPress={() => handleChipPress("Okinawa")}
-              selected={selectedChip === "Okinawa"}
-            >
+            <ChipSpaced onPress={() => handleChipPress("Okinawa")}>
               Okinawa
             </ChipSpaced>
           </TouchableOpacity>

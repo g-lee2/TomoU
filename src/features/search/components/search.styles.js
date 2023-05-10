@@ -18,6 +18,11 @@ export const ChipSpaced = styled(Chip)`
   margin: 5px;
 `;
 
+export const ResetChip = styled(Chip)`
+  margin: 5px;
+  background-color: #d5d5d5;
+`;
+
 export const SafeArea = styled(SafeAreaView)`
   flex: 1;
   ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
