@@ -16,13 +16,14 @@ export const SearchTab = () => {
   const [instituteInfoCards, setInstituteInfoCards] = useState([]);
   const [selectedChip, setSelectedChip] = useState(null);
 
-  const onChangeSearch = (query) => setSearchQuery(query);
-
   useEffect(() => {
     async function fetchData() {
       const querySnapshot = await getDocs(collection(db, "schools"));
       const filteredDocs = querySnapshot.docs.filter((doc) => {
         const data = doc.data();
+        if (searchQuery.length > 0) {
+          return data.Name.toLowerCase().includes(searchQuery.toLowerCase());
+        }
         if (selectedChip === "Kanto") {
           return data.Region === "Kanto";
         } else if (selectedChip === "Kansai") {
@@ -50,7 +51,7 @@ export const SearchTab = () => {
       setInstituteInfoCards(cards);
     }
     fetchData();
-  }, [selectedChip]);
+  }, [selectedChip, searchQuery]);
 
   const handleChipPress = (value) => {
     setSelectedChip(value);
@@ -60,7 +61,7 @@ export const SearchTab = () => {
     <SafeArea>
       <SearchBar
         placeholder="Search"
-        onChangeText={onChangeSearch}
+        onChangeText={(query) => setSearchQuery(query)}
         value={searchQuery}
         elevation={3}
       />
@@ -116,11 +117,7 @@ export const SearchTab = () => {
           </TouchableOpacity>
         </ScrollView>
       </ChipContainer>
-      <ScrollView>
-        {instituteInfoCards.filter((card) =>
-          card.props.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )}
-      </ScrollView>
+      <ScrollView>{instituteInfoCards}</ScrollView>
     </SafeArea>
   );
 };
