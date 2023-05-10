@@ -1,19 +1,24 @@
 import React from "react";
-import { Text } from "react-native";
 import {
   Address,
   InstituteCard,
   InstituteCardCardCover,
   Info,
+  Name,
+  AddressView,
 } from "./info-card-styles.component";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export const InstituteInfoCard = ({ name, address, image }) => {
   return (
     <InstituteCard elevation={5}>
       <InstituteCardCardCover source={{ uri: image }} />
       <Info>
-        <Text>{name}</Text>
-        <Address>{address}</Address>
+        <Name>{name}</Name>
+        <AddressView>
+          <Icon name="map-marker" size={20} color="#BA0021" margin={3} />
+          <Address>{address}</Address>
+        </AddressView>
       </Info>
     </InstituteCard>
   );

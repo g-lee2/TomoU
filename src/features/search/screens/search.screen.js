@@ -13,6 +13,7 @@ import { db } from "../../../../firebase-config";
 export const SearchTab = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [instituteInfoCards, setInstituteInfoCards] = useState([]);
+  const [selectedChip, setSelectedChip] = useState(null);
 
   const onChangeSearch = (query) => setSearchQuery(query);
   console.log(searchQuery);
@@ -20,7 +21,22 @@ export const SearchTab = () => {
   useEffect(() => {
     async function fetchData() {
       const querySnapshot = await getDocs(collection(db, "schools"));
-      const cards = querySnapshot.docs.map((doc) => {
+      const filteredDocs = querySnapshot.docs.filter((doc) => {
+        const data = doc.data();
+        if (selectedChip === "Kanto") {
+          return data.Region === "Kanto";
+        } else if (selectedChip === "Kansai") {
+          return data.Region === "Kansai";
+        } else if (selectedChip === "Kyushu") {
+          return data.Region === "Kyushu";
+        } else if (selectedChip === "Hokkaido") {
+          return data.Region === "Hokkaido";
+        } else if (selectedChip === "Okinawa") {
+          return data.Region === "Okinawa";
+        }
+        return true;
+      });
+      const cards = filteredDocs.map((doc) => {
         const data = doc.data();
         return (
           <InstituteInfoCard
@@ -28,13 +44,18 @@ export const SearchTab = () => {
             name={data.Name}
             address={data.Address}
             image={data.Image}
+            region={data.Region}
           />
         );
       });
       setInstituteInfoCards(cards);
     }
     fetchData();
-  }, []);
+  }, [selectedChip]);
+
+  const handleChipPress = (value) => {
+    setSelectedChip(value);
+  };
 
   return (
     <SafeArea>
@@ -47,19 +68,44 @@ export const SearchTab = () => {
       <ChipContainer>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <TouchableOpacity>
-            <ChipSpaced>Kanto</ChipSpaced>
+            <ChipSpaced
+              onPress={() => handleChipPress("Kanto")}
+              selected={selectedChip === "Kanto"}
+            >
+              Kanto
+            </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced>Kansai</ChipSpaced>
+            <ChipSpaced
+              onPress={() => handleChipPress("Kansai")}
+              selected={selectedChip === "Kansai"}
+            >
+              Kansai
+            </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced>Kyushu</ChipSpaced>
+            <ChipSpaced
+              onPress={() => handleChipPress("Kyushu")}
+              selected={selectedChip === "Kyushu"}
+            >
+              Kyushu
+            </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced>Hokkaido</ChipSpaced>
+            <ChipSpaced
+              onPress={() => handleChipPress("Hokkaido")}
+              selected={selectedChip === "Hokkaido"}
+            >
+              Hokkaido
+            </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced>Okinawa</ChipSpaced>
+            <ChipSpaced
+              onPress={() => handleChipPress("Okinawa")}
+              selected={selectedChip === "Okinawa"}
+            >
+              Okinawa
+            </ChipSpaced>
           </TouchableOpacity>
         </ScrollView>
       </ChipContainer>

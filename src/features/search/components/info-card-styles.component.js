@@ -1,6 +1,11 @@
 import styled from "styled-components/native";
 import { Card } from "react-native-paper";
 
+export const Name = styled.Text`
+  font-size: ${(props) => props.theme.fontSizes.title};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+`;
+
 export const Address = styled.Text`
   font-family: ${(props) => props.theme.fonts.english};
   font-size: ${(props) => props.theme.fontSizes.caption};
@@ -29,4 +34,9 @@ export const SectionEnd = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: flex-end;
+`;
+
+export const AddressView = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
