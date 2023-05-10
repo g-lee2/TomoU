@@ -1,18 +1,27 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { List } from "react-native-paper";
+import { List, TextInput, Chip } from "react-native-paper";
+import {
+  StyledAddListView,
+  TextView,
+  ChipView,
+} from "../components/study-screen-styles.component";
 
 export const StudyTab = ({ navigation }) => {
   return (
     <>
-      <View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Create New List")}
-        >
-          <Icon name="plus-circle" size={40} color="#000" />
-        </TouchableOpacity>
-      </View>
+      <StyledAddListView>
+        <TextView>
+          <TextInput />
+        </TextView>
+        <ChipView>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Create New List")}
+          >
+            <Chip>Add</Chip>
+          </TouchableOpacity>
+        </ChipView>
+      </StyledAddListView>
       <View>
         <List.Section>
           <List.Item

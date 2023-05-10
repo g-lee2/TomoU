@@ -17,7 +17,6 @@ export const SearchTab = () => {
   const [selectedChip, setSelectedChip] = useState(null);
 
   const onChangeSearch = (query) => setSearchQuery(query);
-  console.log(searchQuery);
 
   useEffect(() => {
     async function fetchData() {
@@ -45,7 +44,6 @@ export const SearchTab = () => {
             name={data.Name}
             address={data.Address}
             image={data.Image}
-            region={data.Region}
           />
         );
       });
@@ -69,36 +67,60 @@ export const SearchTab = () => {
       <ChipContainer>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <TouchableOpacity>
-            <ResetChip onPress={() => handleChipPress(null)}>Reset</ResetChip>
+            <ResetChip
+              onPress={() => handleChipPress(null)}
+              selected={selectedChip === null}
+            >
+              Reset
+            </ResetChip>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced onPress={() => handleChipPress("Kanto")}>
+            <ChipSpaced
+              onPress={() => handleChipPress("Kanto")}
+              selected={selectedChip === "Kanto"}
+            >
               Kanto
             </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced onPress={() => handleChipPress("Kansai")}>
+            <ChipSpaced
+              onPress={() => handleChipPress("Kansai")}
+              selected={selectedChip === "Kansai"}
+            >
               Kansai
             </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced onPress={() => handleChipPress("Kyushu")}>
+            <ChipSpaced
+              onPress={() => handleChipPress("Kyushu")}
+              selected={selectedChip === "Kyushu"}
+            >
               Kyushu
             </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced onPress={() => handleChipPress("Hokkaido")}>
+            <ChipSpaced
+              onPress={() => handleChipPress("Hokkaido")}
+              selected={selectedChip === "Hokkaido"}
+            >
               Hokkaido
             </ChipSpaced>
           </TouchableOpacity>
           <TouchableOpacity>
-            <ChipSpaced onPress={() => handleChipPress("Okinawa")}>
+            <ChipSpaced
+              onPress={() => handleChipPress("Okinawa")}
+              selected={selectedChip === "Okinawa"}
+            >
               Okinawa
             </ChipSpaced>
           </TouchableOpacity>
         </ScrollView>
       </ChipContainer>
-      <ScrollView>{instituteInfoCards}</ScrollView>
+      <ScrollView>
+        {instituteInfoCards.filter((card) =>
+          card.props.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )}
+      </ScrollView>
     </SafeArea>
   );
 };

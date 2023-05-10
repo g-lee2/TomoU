@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 export const StudyStackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Lists" component={StudyTab} />
+      <Stack.Screen name="My Lists" component={StudyTab} />
       <Stack.Screen name="Create New List" component={NewList} />
       <Stack.Screen name="Add New Vocab" component={NewVocab} />
       <Stack.Screen name="List Details" component={ListDetails} />
