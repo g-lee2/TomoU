@@ -16,24 +16,15 @@ export const SearchTab = () => {
   const [instituteInfoCards, setInstituteInfoCards] = useState([]);
   const [selectedChip, setSelectedChip] = useState(null);
 
+  const onChangeSearch = (query) => setSearchQuery(query);
+
   useEffect(() => {
     async function fetchData() {
       const querySnapshot = await getDocs(collection(db, "schools"));
       const filteredDocs = querySnapshot.docs.filter((doc) => {
         const data = doc.data();
-        if (searchQuery.length > 0) {
-          return data.Name.toLowerCase().includes(searchQuery.toLowerCase());
-        }
-        if (selectedChip === "Kanto") {
-          return data.Region === "Kanto";
-        } else if (selectedChip === "Kansai") {
-          return data.Region === "Kansai";
-        } else if (selectedChip === "Kyushu") {
-          return data.Region === "Kyushu";
-        } else if (selectedChip === "Hokkaido") {
-          return data.Region === "Hokkaido";
-        } else if (selectedChip === "Okinawa") {
-          return data.Region === "Okinawa";
+        if (selectedChip) {
+          return data.Region === selectedChip;
         }
         return true;
       });
@@ -51,7 +42,7 @@ export const SearchTab = () => {
       setInstituteInfoCards(cards);
     }
     fetchData();
-  }, [selectedChip, searchQuery]);
+  }, [selectedChip]);
 
   const handleChipPress = (value) => {
     setSelectedChip(value);
@@ -61,7 +52,7 @@ export const SearchTab = () => {
     <SafeArea>
       <SearchBar
         placeholder="Search"
-        onChangeText={(query) => setSearchQuery(query)}
+        onChangeText={onChangeSearch}
         value={searchQuery}
         elevation={3}
       />
@@ -117,7 +108,11 @@ export const SearchTab = () => {
           </TouchableOpacity>
         </ScrollView>
       </ChipContainer>
-      <ScrollView>{instituteInfoCards}</ScrollView>
+      <ScrollView>
+        {instituteInfoCards.filter((card) =>
+          card.props.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )}
+      </ScrollView>
     </SafeArea>
   );
 };
