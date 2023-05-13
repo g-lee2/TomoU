@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { firebaseConfig } from "../../../firebase-config";
+import { firebaseConfig, db } from "../../../firebase-config";
 
 export const AuthenticationContext = createContext();
 
@@ -44,6 +44,7 @@ export const AuthenticationContextProvider = ({ children }) => {
 
   const onRegister = (email, password, repeatedPassword) => {
     setIsLoading(true);
+    console.log(db);
     if (password !== repeatedPassword) {
       setError("Error: Passwords do not match");
       return;

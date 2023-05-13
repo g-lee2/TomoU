@@ -16,8 +16,6 @@ export const SearchTab = () => {
   const [instituteInfoCards, setInstituteInfoCards] = useState([]);
   const [selectedChip, setSelectedChip] = useState(null);
 
-  const onChangeSearch = (query) => setSearchQuery(query);
-
   useEffect(() => {
     async function fetchData() {
       const querySnapshot = await getDocs(collection(db, "schools"));
@@ -52,7 +50,7 @@ export const SearchTab = () => {
     <SafeArea>
       <SearchBar
         placeholder="Search"
-        onChangeText={onChangeSearch}
+        onChangeText={(query) => setSearchQuery(query)}
         value={searchQuery}
         elevation={3}
       />

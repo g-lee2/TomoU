@@ -11,3 +11,7 @@ export const TextView = styled.View`
 export const ChipView = styled.View`
   flex: 1;
 `;
+
+export const AddChipText = styled.Text`
+  text-align: center;
+`;
