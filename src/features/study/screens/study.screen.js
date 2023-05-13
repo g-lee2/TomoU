@@ -9,7 +9,13 @@ import {
   ListContainer,
 } from "../components/study-screen-styles.component";
 import { auth, db } from "../../../../firebase-config";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc as docs,
+} from "firebase/firestore";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export const StudyTab = ({ navigation }) => {
@@ -35,11 +41,19 @@ export const StudyTab = ({ navigation }) => {
     fetchData();
   }, [newList]);
 
+  const deleteListItem = async (listId) => {
+    await deleteDoc(docs(db, "lists", listId));
+    const updatedDocs = [...listOfLists].filter((item) => item.id !== listId);
+    setListOfLists(updatedDocs);
+  };
+
   const renderLists = ({ item }) => {
     return (
       <ListContainer>
         <ListItems>{item.title}</ListItems>
-        <Icon name="trash-o" size={20} />
+        <TouchableOpacity onPress={() => deleteListItem(item.id)}>
+          <Icon name="trash-o" size={20} />
+        </TouchableOpacity>
       </ListContainer>
     );
   };
