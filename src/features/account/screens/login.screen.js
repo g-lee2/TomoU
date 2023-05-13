@@ -8,6 +8,8 @@ import {
   AuthButton,
 } from "../components/account.styles";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../../firebase-config";
 
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
