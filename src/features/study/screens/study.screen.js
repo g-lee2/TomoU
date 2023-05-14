@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, FlatList } from "react-native";
-import { TextInput, Chip } from "react-native-paper";
+import { TextInput, Chip, ActivityIndicator } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {
   StyledListView,
@@ -21,6 +21,7 @@ import {
 export const StudyTab = ({ navigation }) => {
   const [newList, setNewList] = useState();
   const [listOfLists, setListOfLists] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   const addNewList = async (title) => {
     await addDoc(collection(db, "lists"), {
@@ -39,6 +40,7 @@ export const StudyTab = ({ navigation }) => {
       setListOfLists(filteredDocs);
     }
     fetchData();
+    setIsLoading(false);
   }, [newList]);
 
   const deleteListItem = async (listId) => {
@@ -77,6 +79,7 @@ export const StudyTab = ({ navigation }) => {
         renderItem={renderLists}
         keyExtractor={(item) => item.id}
       />
+      <ActivityIndicator size="large" color="#0000ff" animating={isLoading} />
     </>
   );
 };

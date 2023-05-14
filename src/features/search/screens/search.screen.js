@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, ScrollView } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import { InstituteInfoCard } from "../components/institute-info-card.component";
 import {
   SearchBar,
@@ -15,6 +16,7 @@ export const SearchTab = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [instituteInfoCards, setInstituteInfoCards] = useState([]);
   const [selectedChip, setSelectedChip] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -40,6 +42,7 @@ export const SearchTab = () => {
       setInstituteInfoCards(cards);
     }
     fetchData();
+    setIsLoading(false);
   }, [selectedChip]);
 
   const handleChipPress = (value) => {
@@ -110,6 +113,7 @@ export const SearchTab = () => {
         {instituteInfoCards.filter((card) =>
           card.props.name.toLowerCase().includes(searchQuery.toLowerCase())
         )}
+        <ActivityIndicator size="large" color="#0000ff" animating={isLoading} />
       </ScrollView>
     </SafeArea>
   );
