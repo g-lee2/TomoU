@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 export const ProfileStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerMode: "none" }}>
       <Stack.Screen name="My Profile" component={ProfileTab} />
       <Stack.Screen name="Edit Profile" component={EditProfile} />
     </Stack.Navigator>
