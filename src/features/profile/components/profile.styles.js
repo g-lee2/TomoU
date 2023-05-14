@@ -51,3 +51,15 @@ export const ChipContainer = styled.View`
   justify-content: center;
   margin-bottom: 6px;
 `;
+
+export const StyledChipEditLong = styled(Chip)`
+  background-color: ${colorChips};
+`;
+
+export const StyledChipEditShort = styled(Chip)`
+  background-color: ${colorChips};
+`;
+
+export const StyledChipEditMedium = styled(Chip)`
+  background-color: ${colorChips};
+`;
