@@ -5,9 +5,10 @@ import {
   StyledChipEditShort,
   StyledChipEditMedium,
   ChipContainer,
+  NameBioTextInput,
 } from "../components/profile.styles";
-import { ScrollView, TextInput, Text, View } from "react-native";
-import { List, Avatar } from "react-native-paper";
+import { ScrollView, View } from "react-native";
+import { List, Avatar, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export const EditProfile = ({ navigation }) => {
@@ -20,8 +21,8 @@ export const EditProfile = ({ navigation }) => {
         <Avatar.Icon size={80} icon="account" />
       </ProfileView>
       <ProfileView>
-        <TextInput placeholder="name" />
-        <TextInput placeholder="bio" />
+        <NameBioTextInput placeholder="name" />
+        <TextInput placeholder="bio" multiline={true} />
       </ProfileView>
       <View>
         <ChipContainer>

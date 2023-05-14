@@ -52,7 +52,7 @@ export const StudyTab = ({ navigation }) => {
   const renderLists = ({ item }) => {
     return (
       <ListContainer>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("List Details")}>
           <ListItems>{item.title}</ListItems>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => deleteListItem(item.id)}>

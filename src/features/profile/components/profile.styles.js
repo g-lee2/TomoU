@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { TouchableOpacity, SafeAreaView, StatusBar } from "react-native";
-import { Chip } from "react-native-paper";
+import { Chip, TextInput } from "react-native-paper";
 
 export const ProfileView = styled.View`
   align-self: center;
@@ -62,4 +62,9 @@ export const StyledChipEditShort = styled(Chip)`
 
 export const StyledChipEditMedium = styled(Chip)`
   background-color: ${colorChips};
+`;
+
+export const NameBioTextInput = styled(TextInput)`
+  height: 30px;
+  width: 200px;
 `;
