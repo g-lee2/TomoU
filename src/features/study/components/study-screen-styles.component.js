@@ -27,6 +27,7 @@ export const ListItems = styled.Text`
 export const ListContainer = styled.View`
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 15px;
   margin-bottom: 10px;
   background-color: #f9f9f9;

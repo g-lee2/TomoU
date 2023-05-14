@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-export const EventsTab = () => {
+export const HomeTab = () => {
   return (
     <View>
-      <Text>Events</Text>
+      <Text>Home</Text>
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, ScrollView } from "react-native";
 import { Avatar, List } from "react-native-paper";
 import {
@@ -11,13 +11,13 @@ import {
 } from "../components/profile.styles";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
-export const ProfileTab = () => {
+export const ProfileTab = ({ navigation }) => {
   const { onLogout } = useContext(AuthenticationContext);
 
   return (
     <SafeArea>
       <ButtonContainer>
-        <Buttons>
+        <Buttons onPress={() => navigation.navigate("Edit Profile")}>
           <Text>Edit</Text>
         </Buttons>
         <Buttons>
@@ -37,9 +37,14 @@ export const ProfileTab = () => {
       </ChipContainer>
       <ScrollView>
         <List.Section title="Resources">
-          <List.Accordion title="JLPT Textbooks">
+          <List.Accordion title="Textbooks">
             <List.Item title="Shin Kanzen Master" />
             <List.Item title="Sou Matome" />
+          </List.Accordion>
+          <List.Accordion title="Podcast/Youtubers">
+            <List.Item title="Kemushi" />
+            <List.Item title="Mori no Nihongo" />
+            <List.Item title="Yu Yu Podcast" />
           </List.Accordion>
           <List.Accordion title="Books I Read">
             <List.Item title="満月珈琲店 1" />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, FlatList, Text } from "react-native";
+import { TouchableOpacity, FlatList } from "react-native";
 import { TextInput, Chip } from "react-native-paper";
+import Icon from "react-native-vector-icons/FontAwesome";
 import {
   StyledListView,
   TextView,
@@ -16,7 +17,6 @@ import {
   deleteDoc,
   doc as docs,
 } from "firebase/firestore";
-import Icon from "react-native-vector-icons/FontAwesome";
 
 export const StudyTab = ({ navigation }) => {
   const [newList, setNewList] = useState();
@@ -50,7 +50,9 @@ export const StudyTab = ({ navigation }) => {
   const renderLists = ({ item }) => {
     return (
       <ListContainer>
-        <ListItems>{item.title}</ListItems>
+        <TouchableOpacity>
+          <ListItems>{item.title}</ListItems>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => deleteListItem(item.id)}>
           <Icon name="trash-o" size={20} />
         </TouchableOpacity>
