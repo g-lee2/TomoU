@@ -10,10 +10,75 @@ import {
 import { ScrollView, View } from "react-native";
 import { List, Avatar, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Button } from "react-native-paper";
+import { db, auth } from "../../../../firebase-config";
+import { doc, setDoc } from "firebase/firestore";
 
 export const EditProfile = ({ navigation }) => {
   const [jlptLevel, setJlptLevel] = useState();
   const [livesInJapan, setLivesInJapan] = useState();
+  const [name, setName] = useState();
+  const [bio, setBio] = useState();
+  const [textbooks, setTextbooks] = useState({
+    firstInput: "",
+    secondInput: "",
+    thirdInput: "",
+    fourthInput: "",
+    fifthInput: "",
+  });
+  const [influencers, setInfluencers] = useState({
+    firstInput: "",
+    secondInput: "",
+    thirdInput: "",
+    fourthInput: "",
+    fifthInput: "",
+  });
+  const [books, setBooks] = useState({
+    firstInput: "",
+    secondInput: "",
+    thirdInput: "",
+    fourthInput: "",
+    fifthInput: "",
+  });
+  const [music, setMusic] = useState({
+    firstInput: "",
+    secondInput: "",
+    thirdInput: "",
+    fourthInput: "",
+    fifthInput: "",
+  });
+  const [shows, setShows] = useState({
+    firstInput: "",
+    secondInput: "",
+    thirdInput: "",
+    fourthInput: "",
+    fifthInput: "",
+  });
+
+  const updateProfile = async () => {
+    try {
+      const userRef = doc(db, "userProfiles", auth.currentUser.uid);
+      await setDoc(
+        userRef,
+        {
+          name,
+          bio,
+          textbooks,
+          influencers,
+          books,
+          music,
+          shows,
+          userId: auth.currentUser.uid,
+        },
+        { merge: true }
+      );
+      console.log("Profile updated successfully");
+      navigation.navigate("My Profile");
+    } catch (error) {
+      console.error("Error writing document: ", error);
+    }
+  };
+
   return (
     <>
       <Icon name="arrow-left" size={20} onPress={() => navigation.goBack()} />
@@ -21,8 +86,12 @@ export const EditProfile = ({ navigation }) => {
         <Avatar.Icon size={80} icon="account" />
       </ProfileView>
       <ProfileView>
-        <NameBioTextInput placeholder="name" />
-        <TextInput placeholder="bio" multiline={true} />
+        <NameBioTextInput placeholder="name" onChangeText={(n) => setName(n)} />
+        <TextInput
+          placeholder="bio"
+          multiline={true}
+          onChangeText={(b) => setBio(b)}
+        />
       </ProfileView>
       <View>
         <ChipContainer>
@@ -77,41 +146,114 @@ export const EditProfile = ({ navigation }) => {
       <ScrollView>
         <List.Section title="Resources">
           <List.Accordion title="Textbooks">
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
+            <TextInput
+              onChangeText={(text) =>
+                setTextbooks({ ...textbooks, firstInput: text })
+              }
+            />
+            <TextInput
+              onChangeText={(text) =>
+                setTextbooks({ ...textbooks, secondInput: text })
+              }
+            />
+            <TextInput
+              onChangeText={(text) =>
+                setTextbooks({ ...textbooks, thirdInput: text })
+              }
+            />
+            <TextInput
+              onChangeText={(text) =>
+                setTextbooks({ ...textbooks, fourthInput: text })
+              }
+            />
+            <TextInput
+              onChangeText={(text) =>
+                setTextbooks({ ...textbooks, fifthInput: text })
+              }
+            />
           </List.Accordion>
           <List.Accordion title="Podcast/Youtubers">
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
+            <TextInput
+              onChangeText={(text) =>
+                setInfluencers({ ...influencers, firstInput: text })
+              }
+            />
+            <TextInput
+              onChangeText={(text) =>
+                setInfluencers({ ...influencers, secondInput: text })
+              }
+            />
+            <TextInput
+              onChangeText={(text) =>
+                setInfluencers({ ...influencers, thirdInput: text })
+              }
+            />
+            <TextInput
+              onChangeText={(text) =>
+                setInfluencers({ ...influencers, fourthInput: text })
+              }
+            />
+            <TextInput
+              onChangeText={(text) =>
+                setInfluencers({ ...influencers, fifthInput: text })
+              }
+            />
           </List.Accordion>
           <List.Accordion title="Books I Read">
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
+            <TextInput
+              onChangeText={(text) => setBooks({ ...books, firstInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setBooks({ ...books, secondInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setBooks({ ...books, thirdInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setBooks({ ...books, fourthInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setBooks({ ...books, fifthInput: text })}
+            />
           </List.Accordion>
           <List.Accordion title="Songs/Artists">
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
+            <TextInput
+              onChangeText={(text) => setMusic({ ...music, firstInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setMusic({ ...music, secondInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setMusic({ ...music, thirdInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setMusic({ ...music, fourthInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setMusic({ ...music, fifthInput: text })}
+            />
           </List.Accordion>
           <List.Accordion title="Shows/Movies">
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
-            <TextInput />
+            <TextInput
+              onChangeText={(text) => setShows({ ...shows, firstInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setShows({ ...shows, secondInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setShows({ ...shows, thirdInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setShows({ ...shows, fourthInput: text })}
+            />
+            <TextInput
+              onChangeText={(text) => setShows({ ...shows, fifthInput: text })}
+            />
           </List.Accordion>
         </List.Section>
+        <Button mode="contained" onPress={updateProfile}>
+          Save
+        </Button>
       </ScrollView>
     </>
   );
