@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, ScrollView } from "react-native";
 import { Avatar, List } from "react-native-paper";
 import {
@@ -6,18 +6,40 @@ import {
   ButtonContainer,
   Buttons,
   SafeArea,
-  StyledChip,
+  StyledChipJlpt,
+  StyledChipJapan,
   ChipContainer,
 } from "../components/profile.styles";
+import { db, auth } from "../../../../firebase-config";
+import { doc as docs, setDoc, getDoc } from "firebase/firestore";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 export const ProfileTab = ({ navigation }) => {
   const { onLogout } = useContext(AuthenticationContext);
+  const [priorProfile, setPriorProfile] = useState();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const docRef = docs(db, "userProfiles", auth.currentUser.uid);
+        const docSnapshot = await getDoc(docRef);
+        if (docSnapshot.exists()) {
+          const data = docSnapshot.data();
+          setPriorProfile(data);
+        }
+      } catch (error) {
+        console.log("Error fetching data from Firestore:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <SafeArea>
       <ButtonContainer>
-        <Buttons onPress={() => navigation.navigate("Edit Profile")}>
+        <Buttons
+          onPress={() => navigation.navigate("Edit Profile", { priorProfile })}
+        >
           <Text>Edit</Text>
         </Buttons>
         <Buttons>
@@ -32,8 +54,8 @@ export const ProfileTab = ({ navigation }) => {
         <Text>Goals: Pass N1 July 2023</Text>
       </ProfileView>
       <ChipContainer>
-        <StyledChip>JLPT N1</StyledChip>
-        <StyledChip>&#x1F4CD; Japan</StyledChip>
+        <StyledChipJlpt>JLPT N1</StyledChipJlpt>
+        <StyledChipJapan>&#x1F4CD; Japan</StyledChipJapan>
       </ChipContainer>
       <ScrollView>
         <List.Section title="Resources">

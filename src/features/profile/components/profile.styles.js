@@ -26,23 +26,12 @@ export const SafeArea = styled(SafeAreaView)`
   ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `;
 
-const colorChips = (props) => {
-  const randomNumb = Math.floor(Math.random() * 4);
-  let color;
-  if (randomNumb === 0) {
-    color = props.theme.colors.brandBlue.secondary;
-  } else if (randomNumb === 1) {
-    color = props.theme.colors.brandGreen.secondary;
-  } else if (randomNumb === 2) {
-    color = props.theme.colors.brandPurple.secondary;
-  } else {
-    color = props.theme.colors.brandPink.secondary;
-  }
-  return color;
-};
+export const StyledChipJapan = styled(Chip)`
+  background-color: ${(props) => props.theme.colors.brandBlue.secondary};
+`;
 
-export const StyledChip = styled(Chip)`
-  background-color: ${colorChips};
+export const StyledChipJlpt = styled(Chip)`
+  background-color: ${(props) => props.theme.colors.brandPink.secondary};
 `;
 
 export const ChipContainer = styled.View`
@@ -50,18 +39,6 @@ export const ChipContainer = styled.View`
   align-items: center;
   justify-content: center;
   margin-bottom: 6px;
-`;
-
-export const StyledChipEditLong = styled(Chip)`
-  background-color: ${colorChips};
-`;
-
-export const StyledChipEditShort = styled(Chip)`
-  background-color: ${colorChips};
-`;
-
-export const StyledChipEditMedium = styled(Chip)`
-  background-color: ${colorChips};
 `;
 
 export const NameBioTextInput = styled(TextInput)`
