@@ -48,41 +48,36 @@ export const ProfileTab = ({ navigation }) => {
           <ScrollView>
             <List.Section title="Resources">
               <List.Accordion title="Textbooks">
-                {Object.values(priorProfile.textbooks)
-                  .filter((value) => value)
-                  .sort()
+                {priorProfile.textbooks
+                  ?.filter((value) => value)
                   .map((value, index) => (
                     <List.Item key={index} title={value} />
                   ))}
               </List.Accordion>
               <List.Accordion title="Podcast/Youtubers">
-                {Object.values(priorProfile.influencers)
-                  .filter((value) => value)
-                  .sort()
+                {priorProfile.influencers
+                  ?.filter((value) => value)
                   .map((value, index) => (
                     <List.Item key={index} title={value} />
                   ))}
               </List.Accordion>
               <List.Accordion title="Books I Read">
-                {Object.values(priorProfile.books)
-                  .filter((value) => value)
-                  .sort()
+                {priorProfile.books
+                  ?.filter((value) => value)
                   .map((value, index) => (
                     <List.Item key={index} title={value} />
                   ))}
               </List.Accordion>
               <List.Accordion title="Songs/Artists">
-                {Object.values(priorProfile.music)
-                  .filter((value) => value)
-                  .sort()
+                {priorProfile.music
+                  ?.filter((value) => value)
                   .map((value, index) => (
                     <List.Item key={index} title={value} />
                   ))}
               </List.Accordion>
               <List.Accordion title="Shows/Movies">
-                {Object.values(priorProfile.shows)
-                  .filter((value) => value)
-                  .sort()
+                {priorProfile.shows
+                  ?.filter((value) => value)
                   .map((value, index) => (
                     <List.Item key={index} title={value} />
                   ))}

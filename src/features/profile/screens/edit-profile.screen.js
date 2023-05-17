@@ -11,50 +11,20 @@ import { List, Avatar, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button } from "react-native-paper";
 import { db, auth } from "../../../../firebase-config";
-import { doc as docs, setDoc } from "firebase/firestore";
+import { doc as docs, setDoc, addDoc } from "firebase/firestore";
 import { ProfileContext } from "../../../services/profile/profile-info.context";
 
 export const EditProfile = ({ navigation }) => {
   const { priorProfile } = useContext(ProfileContext);
-  const [jlptLevel, setJlptLevel] = useState();
-  const [livesInJapan, setLivesInJapan] = useState();
+  const [jlptLevel, setJlptLevel] = useState(priorProfile?.jlptLevel);
+  const [livesInJapan, setLivesInJapan] = useState(priorProfile?.livesInJapan);
   const [name, setName] = useState(priorProfile?.name);
   const [bio, setBio] = useState(priorProfile?.bio);
-  const [textbooks, setTextbooks] = useState({
-    firstInput: priorProfile?.textbooks?.firstInput,
-    secondInput: priorProfile?.textbooks?.secondInput,
-    thirdInput: priorProfile?.textbooks?.thirdInput,
-    fourthInput: priorProfile?.textbooks?.fourthInput,
-    fifthInput: priorProfile?.textbooks?.fifthInput,
-  });
-  const [influencers, setInfluencers] = useState({
-    firstInput: priorProfile?.influencers?.firstInput,
-    secondInput: priorProfile?.influencers?.secondInput,
-    thirdInput: priorProfile?.influencers?.thirdInput,
-    fourthInput: priorProfile?.influencers?.fourthInput,
-    fifthInput: priorProfile?.influencers?.fifthInput,
-  });
-  const [books, setBooks] = useState({
-    firstInput: priorProfile?.books?.firstInput,
-    secondInput: priorProfile?.books?.secondInput,
-    thirdInput: priorProfile?.books?.thirdInput,
-    fourthInput: priorProfile?.books?.fourthInput,
-    fifthInput: priorProfile?.books?.fifthInput,
-  });
-  const [music, setMusic] = useState({
-    firstInput: priorProfile?.music?.firstInput,
-    secondInput: priorProfile?.music?.secondInput,
-    thirdInput: priorProfile?.music?.thirdInput,
-    fourthInput: priorProfile?.music?.fourthInput,
-    fifthInput: priorProfile?.music?.fifthInput,
-  });
-  const [shows, setShows] = useState({
-    firstInput: priorProfile?.shows?.firstInput,
-    secondInput: priorProfile?.shows?.secondInput,
-    thirdInput: priorProfile?.shows?.thirdInput,
-    fourthInput: priorProfile?.shows?.fourthInput,
-    fifthInput: priorProfile?.shows?.fifthInput,
-  });
+  const [textbooks, setTextbooks] = useState(new Array(5).fill(""));
+  const [influencers, setInfluencers] = useState(new Array(5).fill(""));
+  const [books, setBooks] = useState(new Array(5).fill(""));
+  const [music, setMusic] = useState(new Array(5).fill(""));
+  const [shows, setShows] = useState(new Array(5).fill(""));
 
   const updateProfile = async () => {
     try {
@@ -63,6 +33,18 @@ export const EditProfile = ({ navigation }) => {
         return;
       }
       const userRef = docs(db, "userProfiles", auth.currentUser.uid);
+      console.log({
+        name: name || "",
+        bio: bio || "",
+        textbooks: textbooks || [],
+        influencers: influencers || [],
+        books: books || [],
+        music: music || [],
+        shows: shows || [],
+        jlptLevel: jlptLevel || "",
+        livesInJapan: livesInJapan || false,
+        userId: auth.currentUser?.uid || "",
+      });
       await setDoc(
         userRef,
         {
@@ -159,132 +141,212 @@ export const EditProfile = ({ navigation }) => {
         <List.Section title="Resources">
           <List.Accordion title="Textbooks">
             <TextInput
-              defaultValue={textbooks.firstInput}
-              onChangeText={(text) =>
-                setTextbooks({ ...textbooks, firstInput: text })
-              }
+              defaultValue={textbooks[0]}
+              onChangeText={(text) => {
+                let updatedTextbooks = [...textbooks];
+                updatedTextbooks[0] = text;
+                setTextbooks(updatedTextbooks);
+              }}
             />
             <TextInput
-              defaultValue={textbooks.secondInput}
-              onChangeText={(text) =>
-                setTextbooks({ ...textbooks, secondInput: text })
-              }
+              defaultValue={textbooks[1]}
+              onChangeText={(text) => {
+                let updatedTextbooks = [...textbooks];
+                updatedTextbooks[1] = text;
+                setTextbooks(updatedTextbooks);
+              }}
             />
             <TextInput
-              defaultValue={textbooks.thirdInput}
-              onChangeText={(text) =>
-                setTextbooks({ ...textbooks, thirdInput: text })
-              }
+              defaultValue={textbooks[2]}
+              onChangeText={(text) => {
+                let updatedTextbooks = [...textbooks];
+                updatedTextbooks[2] = text;
+                setTextbooks(updatedTextbooks);
+              }}
             />
             <TextInput
-              defaultValue={textbooks.fourthInput}
-              onChangeText={(text) =>
-                setTextbooks({ ...textbooks, fourthInput: text })
-              }
+              defaultValue={textbooks[3]}
+              onChangeText={(text) => {
+                let updatedTextbooks = [...textbooks];
+                updatedTextbooks[3] = text;
+                setTextbooks(updatedTextbooks);
+              }}
             />
             <TextInput
-              defaultValue={textbooks.fifthInput}
-              onChangeText={(text) =>
-                setTextbooks({ ...textbooks, fifthInput: text })
-              }
+              defaultValue={textbooks[4]}
+              onChangeText={(text) => {
+                let updatedTextbooks = [...textbooks];
+                updatedTextbooks[4] = text;
+                setTextbooks(updatedTextbooks);
+              }}
             />
           </List.Accordion>
           <List.Accordion title="Podcast/Youtubers">
             <TextInput
-              defaultValue={influencers.firstInput}
-              onChangeText={(text) =>
-                setInfluencers({ ...influencers, firstInput: text })
-              }
+              defaultValue={influencers[0]}
+              onChangeText={(text) => {
+                let updatedInfluencers = [...influencers];
+                updatedInfluencers[0] = text;
+                setInfluencers(updatedInfluencers);
+              }}
             />
             <TextInput
-              defaultValue={influencers.secondInput}
-              onChangeText={(text) =>
-                setInfluencers({ ...influencers, secondInput: text })
-              }
+              defaultValue={influencers[1]}
+              onChangeText={(text) => {
+                let updatedInfluencers = [...influencers];
+                updatedInfluencers[1] = text;
+                setInfluencers(updatedInfluencers);
+              }}
             />
             <TextInput
-              defaultValue={influencers.thirdInput}
-              onChangeText={(text) =>
-                setInfluencers({ ...influencers, thirdInput: text })
-              }
+              defaultValue={influencers[2]}
+              onChangeText={(text) => {
+                let updatedInfluencers = [...influencers];
+                updatedInfluencers[2] = text;
+                setInfluencers(updatedInfluencers);
+              }}
             />
             <TextInput
-              defaultValue={influencers.fourthInput}
-              onChangeText={(text) =>
-                setInfluencers({ ...influencers, fourthInput: text })
-              }
+              defaultValue={influencers[3]}
+              onChangeText={(text) => {
+                let updatedInfluencers = [...influencers];
+                updatedInfluencers[3] = text;
+                setInfluencers(updatedInfluencers);
+              }}
             />
             <TextInput
-              defaultValue={influencers.fifthInput}
-              onChangeText={(text) =>
-                setInfluencers({ ...influencers, fifthInput: text })
-              }
+              defaultValue={influencers[4]}
+              onChangeText={(text) => {
+                let updatedInfluencers = [...influencers];
+                updatedInfluencers[4] = text;
+                setInfluencers(updatedInfluencers);
+              }}
             />
           </List.Accordion>
           <List.Accordion title="Books I Read">
             <TextInput
-              defaultValue={books.firstInput}
-              onChangeText={(text) => setBooks({ ...books, firstInput: text })}
+              defaultValue={books[0]}
+              onChangeText={(text) => {
+                let updatedBooks = [...books];
+                updatedBooks[0] = text;
+                setBooks(updatedBooks);
+              }}
             />
             <TextInput
-              defaultValue={books.secondInput}
-              onChangeText={(text) => setBooks({ ...books, secondInput: text })}
+              defaultValue={books[1]}
+              onChangeText={(text) => {
+                let updatedBooks = [...books];
+                updatedBooks[1] = text;
+                setBooks(updatedBooks);
+              }}
             />
             <TextInput
-              defaultValue={books.thirdInput}
-              onChangeText={(text) => setBooks({ ...books, thirdInput: text })}
+              defaultValue={books[2]}
+              onChangeText={(text) => {
+                let updatedBooks = [...books];
+                updatedBooks[2] = text;
+                setBooks(updatedBooks);
+              }}
             />
             <TextInput
-              defaultValue={books.fourthInput}
-              onChangeText={(text) => setBooks({ ...books, fourthInput: text })}
+              defaultValue={books[3]}
+              onChangeText={(text) => {
+                let updatedBooks = [...books];
+                updatedBooks[3] = text;
+                setBooks(updatedBooks);
+              }}
             />
             <TextInput
-              defaultValue={books.fifthInput}
-              onChangeText={(text) => setBooks({ ...books, fifthInput: text })}
+              defaultValue={books[4]}
+              onChangeText={(text) => {
+                let updatedBooks = [...books];
+                updatedBooks[4] = text;
+                setBooks(updatedBooks);
+              }}
             />
           </List.Accordion>
           <List.Accordion title="Songs/Artists">
             <TextInput
-              defaultValue={music.firstInput}
-              onChangeText={(text) => setMusic({ ...music, firstInput: text })}
+              defaultValue={music[0]}
+              onChangeText={(text) => {
+                let updatedMusic = [...music];
+                updatedMusic[0] = text;
+                setMusic(updatedMusic);
+              }}
             />
             <TextInput
-              defaultValue={music.secondInput}
-              onChangeText={(text) => setMusic({ ...music, secondInput: text })}
+              defaultValue={music[1]}
+              onChangeText={(text) => {
+                let updatedMusic = [...music];
+                updatedMusic[1] = text;
+                setMusic(updatedMusic);
+              }}
             />
             <TextInput
-              defaultValue={music.thirdInput}
-              onChangeText={(text) => setMusic({ ...music, thirdInput: text })}
+              defaultValue={music[2]}
+              onChangeText={(text) => {
+                let updatedMusic = [...music];
+                updatedMusic[2] = text;
+                setMusic(updatedMusic);
+              }}
             />
             <TextInput
-              defaultValue={music.fourthInput}
-              onChangeText={(text) => setMusic({ ...music, fourthInput: text })}
+              defaultValue={music[3]}
+              onChangeText={(text) => {
+                let updatedMusic = [...music];
+                updatedMusic[3] = text;
+                setMusic(updatedMusic);
+              }}
             />
             <TextInput
-              defaultValue={music.fifthInput}
-              onChangeText={(text) => setMusic({ ...music, fifthInput: text })}
+              defaultValue={music[4]}
+              onChangeText={(text) => {
+                let updatedMusic = [...music];
+                updatedMusic[4] = text;
+                setMusic(updatedMusic);
+              }}
             />
           </List.Accordion>
           <List.Accordion title="Shows/Movies">
             <TextInput
-              defaultValue={shows.firstInput}
-              onChangeText={(text) => setShows({ ...shows, firstInput: text })}
+              defaultValue={shows[0]}
+              onChangeText={(text) => {
+                let updatedShows = [...shows];
+                updatedShows[0] = text;
+                setShows(updatedShows);
+              }}
             />
             <TextInput
-              defaultValue={shows.secondInput}
-              onChangeText={(text) => setShows({ ...shows, secondInput: text })}
+              defaultValue={shows[1]}
+              onChangeText={(text) => {
+                let updatedShows = [...shows];
+                updatedShows[1] = text;
+                setShows(updatedShows);
+              }}
             />
             <TextInput
-              defaultValue={shows.thirdInput}
-              onChangeText={(text) => setShows({ ...shows, thirdInput: text })}
+              defaultValue={shows[2]}
+              onChangeText={(text) => {
+                let updatedShows = [...shows];
+                updatedShows[2] = text;
+                setShows(updatedShows);
+              }}
             />
             <TextInput
-              defaultValue={shows.fourthInput}
-              onChangeText={(text) => setShows({ ...shows, fourthInput: text })}
+              defaultValue={shows[3]}
+              onChangeText={(text) => {
+                let updatedShows = [...shows];
+                updatedShows[3] = text;
+                setShows(updatedShows);
+              }}
             />
             <TextInput
-              defaultValue={shows.fifthInput}
-              onChangeText={(text) => setShows({ ...shows, fifthInput: text })}
+              defaultValue={shows[4]}
+              onChangeText={(text) => {
+                let updatedShows = [...shows];
+                updatedShows[4] = text;
+                setShows(updatedShows);
+              }}
             />
           </List.Accordion>
         </List.Section>
