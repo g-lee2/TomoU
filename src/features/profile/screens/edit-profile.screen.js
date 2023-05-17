@@ -94,12 +94,12 @@ export const EditProfile = ({ navigation }) => {
       </ProfileView>
       <ProfileView>
         <NameBioTextInput
-          defaultValue={priorProfile.name}
+          defaultValue={name}
           placeholder="name"
           onChangeText={(n) => setName(n)}
         />
         <TextInput
-          defaultValue={priorProfile.bio}
+          defaultValue={bio}
           placeholder="bio"
           multiline={true}
           onChangeText={(b) => setBio(b)}
@@ -159,31 +159,31 @@ export const EditProfile = ({ navigation }) => {
         <List.Section title="Resources">
           <List.Accordion title="Textbooks">
             <TextInput
-              defaultValue={priorProfile.textbooks.firstInput}
+              defaultValue={textbooks.firstInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, firstInput: text })
               }
             />
             <TextInput
-              defaultValue={priorProfile.textbooks.secondInput}
+              defaultValue={textbooks.secondInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, secondInput: text })
               }
             />
             <TextInput
-              defaultValue={priorProfile.textbooks.thirdInput}
+              defaultValue={textbooks.thirdInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, thirdInput: text })
               }
             />
             <TextInput
-              defaultValue={priorProfile.textbooks.fourthInput}
+              defaultValue={textbooks.fourthInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, fourthInput: text })
               }
             />
             <TextInput
-              defaultValue={priorProfile.textbooks.fifthInput}
+              defaultValue={textbooks.fifthInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, fifthInput: text })
               }
@@ -191,31 +191,31 @@ export const EditProfile = ({ navigation }) => {
           </List.Accordion>
           <List.Accordion title="Podcast/Youtubers">
             <TextInput
-              defaultValue={priorProfile.influencers.firstInput}
+              defaultValue={influencers.firstInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, firstInput: text })
               }
             />
             <TextInput
-              defaultValue={priorProfile.influencers.secondInput}
+              defaultValue={influencers.secondInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, secondInput: text })
               }
             />
             <TextInput
-              defaultValue={priorProfile.influencers.thirdInput}
+              defaultValue={influencers.thirdInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, thirdInput: text })
               }
             />
             <TextInput
-              defaultValue={priorProfile.influencers.fourthInput}
+              defaultValue={influencers.fourthInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, fourthInput: text })
               }
             />
             <TextInput
-              defaultValue={priorProfile.influencers.fifthInput}
+              defaultValue={influencers.fifthInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, fifthInput: text })
               }
@@ -223,67 +223,67 @@ export const EditProfile = ({ navigation }) => {
           </List.Accordion>
           <List.Accordion title="Books I Read">
             <TextInput
-              defaultValue={priorProfile.books.firstInput}
+              defaultValue={books.firstInput}
               onChangeText={(text) => setBooks({ ...books, firstInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.books.secondInput}
+              defaultValue={books.secondInput}
               onChangeText={(text) => setBooks({ ...books, secondInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.books.thirdInput}
+              defaultValue={books.thirdInput}
               onChangeText={(text) => setBooks({ ...books, thirdInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.books.fourthInput}
+              defaultValue={books.fourthInput}
               onChangeText={(text) => setBooks({ ...books, fourthInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.books.fifthInput}
+              defaultValue={books.fifthInput}
               onChangeText={(text) => setBooks({ ...books, fifthInput: text })}
             />
           </List.Accordion>
           <List.Accordion title="Songs/Artists">
             <TextInput
-              defaultValue={priorProfile.music.firstInput}
+              defaultValue={music.firstInput}
               onChangeText={(text) => setMusic({ ...music, firstInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.music.secondInput}
+              defaultValue={music.secondInput}
               onChangeText={(text) => setMusic({ ...music, secondInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.music.thirdInput}
+              defaultValue={music.thirdInput}
               onChangeText={(text) => setMusic({ ...music, thirdInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.music.fourthInput}
+              defaultValue={music.fourthInput}
               onChangeText={(text) => setMusic({ ...music, fourthInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.music.fifthInput}
+              defaultValue={music.fifthInput}
               onChangeText={(text) => setMusic({ ...music, fifthInput: text })}
             />
           </List.Accordion>
           <List.Accordion title="Shows/Movies">
             <TextInput
-              defaultValue={priorProfile.shows.firstInput}
+              defaultValue={shows.firstInput}
               onChangeText={(text) => setShows({ ...shows, firstInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.shows.secondInput}
+              defaultValue={shows.secondInput}
               onChangeText={(text) => setShows({ ...shows, secondInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.shows.thirdInput}
+              defaultValue={shows.thirdInput}
               onChangeText={(text) => setShows({ ...shows, thirdInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.shows.fourthInput}
+              defaultValue={shows.fourthInput}
               onChangeText={(text) => setShows({ ...shows, fourthInput: text })}
             />
             <TextInput
-              defaultValue={priorProfile.shows.fifthInput}
+              defaultValue={shows.fifthInput}
               onChangeText={(text) => setShows({ ...shows, fifthInput: text })}
             />
           </List.Accordion>

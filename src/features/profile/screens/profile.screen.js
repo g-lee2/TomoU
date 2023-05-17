@@ -48,44 +48,44 @@ export const ProfileTab = ({ navigation }) => {
           <ScrollView>
             <List.Section title="Resources">
               <List.Accordion title="Textbooks">
-                {priorProfile?.textbooks &&
-                  Object.values(priorProfile.textbooks)
-                    .filter((value) => value)
-                    .map((value, index) => (
-                      <List.Item key={index} title={value} />
-                    ))}
+                {Object.values(priorProfile.textbooks)
+                  .filter((value) => value)
+                  .sort()
+                  .map((value, index) => (
+                    <List.Item key={index} title={value} />
+                  ))}
               </List.Accordion>
               <List.Accordion title="Podcast/Youtubers">
-                {priorProfile?.influencers &&
-                  Object.values(priorProfile.influencers)
-                    .filter((value) => value)
-                    .map((value, index) => (
-                      <List.Item key={index} title={value} />
-                    ))}
+                {Object.values(priorProfile.influencers)
+                  .filter((value) => value)
+                  .sort()
+                  .map((value, index) => (
+                    <List.Item key={index} title={value} />
+                  ))}
               </List.Accordion>
               <List.Accordion title="Books I Read">
-                {priorProfile?.books &&
-                  Object.values(priorProfile.books)
-                    .filter((value) => value)
-                    .map((value, index) => (
-                      <List.Item key={index} title={value} />
-                    ))}
+                {Object.values(priorProfile.books)
+                  .filter((value) => value)
+                  .sort()
+                  .map((value, index) => (
+                    <List.Item key={index} title={value} />
+                  ))}
               </List.Accordion>
               <List.Accordion title="Songs/Artists">
-                {priorProfile?.music &&
-                  Object.values(priorProfile.music)
-                    .filter((value) => value)
-                    .map((value, index) => (
-                      <List.Item key={index} title={value} />
-                    ))}
+                {Object.values(priorProfile.music)
+                  .filter((value) => value)
+                  .sort()
+                  .map((value, index) => (
+                    <List.Item key={index} title={value} />
+                  ))}
               </List.Accordion>
               <List.Accordion title="Shows/Movies">
-                {priorProfile?.shows &&
-                  Object.values(priorProfile.shows)
-                    .filter((value) => value)
-                    .map((value, index) => (
-                      <List.Item key={index} title={value} />
-                    ))}
+                {Object.values(priorProfile.shows)
+                  .filter((value) => value)
+                  .sort()
+                  .map((value, index) => (
+                    <List.Item key={index} title={value} />
+                  ))}
               </List.Accordion>
             </List.Section>
           </ScrollView>
