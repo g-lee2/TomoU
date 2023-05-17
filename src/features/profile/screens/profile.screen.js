@@ -45,29 +45,39 @@ export const ProfileTab = ({ navigation }) => {
       <ScrollView>
         <List.Section title="Resources">
           <List.Accordion title="Textbooks">
-            {Object.keys(priorProfile.textbooks).map((key) => (
-              <List.Item key={key} title={priorProfile.textbooks[key]} />
-            ))}
+            {Object.values(priorProfile.textbooks)
+              .filter((value) => value)
+              .map((value, index) => (
+                <List.Item key={index} title={value} />
+              ))}
           </List.Accordion>
           <List.Accordion title="Podcast/Youtubers">
-            {Object.keys(priorProfile.influencers).map((key) => (
-              <List.Item key={key} title={priorProfile.influencers[key]} />
-            ))}
+            {Object.values(priorProfile.influencers)
+              .filter((value) => value)
+              .map((value, index) => (
+                <List.Item key={index} title={value} />
+              ))}
           </List.Accordion>
           <List.Accordion title="Books I Read">
-            {Object.keys(priorProfile.books).map((key) => (
-              <List.Item key={key} title={priorProfile.books[key]} />
-            ))}
+            {Object.values(priorProfile.books)
+              .filter((value) => value)
+              .map((value, index) => (
+                <List.Item key={index} title={value} />
+              ))}
           </List.Accordion>
           <List.Accordion title="Songs/Artists">
-            {Object.keys(priorProfile.music).map((key) => (
-              <List.Item key={key} title={priorProfile.music[key]} />
-            ))}
+            {Object.values(priorProfile.music)
+              .filter((value) => value)
+              .map((value, index) => (
+                <List.Item key={index} title={value} />
+              ))}
           </List.Accordion>
           <List.Accordion title="Shows/Movies">
-            {Object.keys(priorProfile.shows).map((key) => (
-              <List.Item key={key} title={priorProfile.shows[key]} />
-            ))}
+            {Object.values(priorProfile.shows)
+              .filter((value) => value)
+              .map((value, index) => (
+                <List.Item key={index} title={value} />
+              ))}
           </List.Accordion>
         </List.Section>
       </ScrollView>
