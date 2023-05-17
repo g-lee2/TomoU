@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components/native";
 import { Navigation } from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/theme";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+import { ProfileContextProvider } from "./src/services/profile/profile-info.context";
 import {
   useFonts as useKosugiMaru,
   KosugiMaru_400Regular,
@@ -27,7 +28,9 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <Navigation />
+          <ProfileContextProvider>
+            <Navigation />
+          </ProfileContextProvider>
         </AuthenticationContextProvider>
       </ThemeProvider>
       <StatusBar style="auto" />

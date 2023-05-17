@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Text, ScrollView } from "react-native";
 import { Avatar, List } from "react-native-paper";
 import {
@@ -10,29 +10,12 @@ import {
   StyledChipJapan,
   ChipContainer,
 } from "../components/profile.styles";
-import { db, auth } from "../../../../firebase-config";
-import { doc as docs, setDoc, getDoc } from "firebase/firestore";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { ProfileContext } from "../../../services/profile/profile-info.context";
 
 export const ProfileTab = ({ navigation }) => {
   const { onLogout } = useContext(AuthenticationContext);
-  const [priorProfile, setPriorProfile] = useState();
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const docRef = docs(db, "userProfiles", auth.currentUser.uid);
-        const docSnapshot = await getDoc(docRef);
-        if (docSnapshot.exists()) {
-          const data = docSnapshot.data();
-          setPriorProfile(data);
-        }
-      } catch (error) {
-        console.log("Error fetching data from Firestore:", error);
-      }
-    }
-    fetchData();
-  }, []);
+  const { priorProfile } = useContext(ProfileContext);
 
   return (
     <SafeArea>
@@ -48,38 +31,43 @@ export const ProfileTab = ({ navigation }) => {
       </ButtonContainer>
       <ProfileView>
         <Avatar.Icon size={80} icon="account" />
-        <Text>Tony August</Text>
+        <Text>{priorProfile.name}</Text>
       </ProfileView>
       <ProfileView>
-        <Text>Goals: Pass N1 July 2023</Text>
+        <Text>{priorProfile.bio}</Text>
       </ProfileView>
       <ChipContainer>
-        <StyledChipJlpt>JLPT N1</StyledChipJlpt>
-        <StyledChipJapan>&#x1F4CD; Japan</StyledChipJapan>
+        <StyledChipJlpt>{priorProfile.jlptLevel}</StyledChipJlpt>
+        <StyledChipJapan>
+          &#x1F4CD; {priorProfile.livesInJapan ? "Japan" : "Outside Japan"}
+        </StyledChipJapan>
       </ChipContainer>
       <ScrollView>
         <List.Section title="Resources">
           <List.Accordion title="Textbooks">
-            <List.Item title="Shin Kanzen Master" />
-            <List.Item title="Sou Matome" />
+            {Object.keys(priorProfile.textbooks).map((key) => (
+              <List.Item key={key} title={priorProfile.textbooks[key]} />
+            ))}
           </List.Accordion>
           <List.Accordion title="Podcast/Youtubers">
-            <List.Item title="Kemushi" />
-            <List.Item title="Mori no Nihongo" />
-            <List.Item title="Yu Yu Podcast" />
+            {Object.keys(priorProfile.influencers).map((key) => (
+              <List.Item key={key} title={priorProfile.influencers[key]} />
+            ))}
           </List.Accordion>
           <List.Accordion title="Books I Read">
-            <List.Item title="満月珈琲店 1" />
-            <List.Item title="満月珈琲店 2" />
+            {Object.keys(priorProfile.books).map((key) => (
+              <List.Item key={key} title={priorProfile.books[key]} />
+            ))}
           </List.Accordion>
           <List.Accordion title="Songs/Artists">
-            <List.Item title="Aimyon" />
-            <List.Item title="Radwimps" />
+            {Object.keys(priorProfile.music).map((key) => (
+              <List.Item key={key} title={priorProfile.music[key]} />
+            ))}
           </List.Accordion>
           <List.Accordion title="Shows/Movies">
-            <List.Item title="One Piece" />
-            <List.Item title="Demon Slayer" />
-            <List.Item title="Naruto" />
+            {Object.keys(priorProfile.shows).map((key) => (
+              <List.Item key={key} title={priorProfile.shows[key]} />
+            ))}
           </List.Accordion>
         </List.Section>
       </ScrollView>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import {
   ProfileView,
   StyledChipJapan,
@@ -11,20 +11,21 @@ import { List, Avatar, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button } from "react-native-paper";
 import { db, auth } from "../../../../firebase-config";
-import { doc as docs, setDoc, getDoc } from "firebase/firestore";
+import { doc as docs, setDoc } from "firebase/firestore";
+import { ProfileContext } from "../../../services/profile/profile-info.context";
 
-export const EditProfile = ({ route, navigation }) => {
+export const EditProfile = ({ navigation }) => {
   const [jlptLevel, setJlptLevel] = useState();
   const [livesInJapan, setLivesInJapan] = useState();
-  const { priorProfile } = route.params;
+  const { priorProfile } = useContext(ProfileContext);
   const [name, setName] = useState(priorProfile.name);
   const [bio, setBio] = useState(priorProfile.bio);
   const [textbooks, setTextbooks] = useState({
     firstInput: priorProfile.textbooks.firstInput,
-    secondInput: priorProfile.textbooks.firstInput,
-    thirdInput: priorProfile.textbooks.firstInput,
-    fourthInput: priorProfile.textbooks.firstInput,
-    fifthInput: priorProfile.textbooks.firstInput,
+    secondInput: priorProfile.textbooks.secondInput,
+    thirdInput: priorProfile.textbooks.thirdInput,
+    fourthInput: priorProfile.textbooks.fourthInput,
+    fifthInput: priorProfile.textbooks.fifthInput,
   });
   const [influencers, setInfluencers] = useState({
     firstInput: priorProfile.influencers.firstInput,
@@ -68,6 +69,8 @@ export const EditProfile = ({ route, navigation }) => {
           books,
           music,
           shows,
+          jlptLevel,
+          livesInJapan,
           userId: auth.currentUser.uid,
         },
         { merge: true }
@@ -152,7 +155,7 @@ export const EditProfile = ({ route, navigation }) => {
         <List.Section title="Resources">
           <List.Accordion title="Textbooks">
             <TextInput
-              defaultValue={priorProfile.textbooks.firstInput}
+              defaultValue={textbooks.firstInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, firstInput: text })
               }
