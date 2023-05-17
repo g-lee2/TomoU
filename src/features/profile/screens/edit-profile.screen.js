@@ -15,49 +15,53 @@ import { doc as docs, setDoc } from "firebase/firestore";
 import { ProfileContext } from "../../../services/profile/profile-info.context";
 
 export const EditProfile = ({ navigation }) => {
+  const { priorProfile } = useContext(ProfileContext);
   const [jlptLevel, setJlptLevel] = useState();
   const [livesInJapan, setLivesInJapan] = useState();
-  const { priorProfile } = useContext(ProfileContext);
-  const [name, setName] = useState(priorProfile.name);
-  const [bio, setBio] = useState(priorProfile.bio);
+  const [name, setName] = useState(priorProfile?.name);
+  const [bio, setBio] = useState(priorProfile?.bio);
   const [textbooks, setTextbooks] = useState({
-    firstInput: priorProfile.textbooks.firstInput,
-    secondInput: priorProfile.textbooks.secondInput,
-    thirdInput: priorProfile.textbooks.thirdInput,
-    fourthInput: priorProfile.textbooks.fourthInput,
-    fifthInput: priorProfile.textbooks.fifthInput,
+    firstInput: priorProfile?.textbooks?.firstInput,
+    secondInput: priorProfile?.textbooks?.secondInput,
+    thirdInput: priorProfile?.textbooks?.thirdInput,
+    fourthInput: priorProfile?.textbooks?.fourthInput,
+    fifthInput: priorProfile?.textbooks?.fifthInput,
   });
   const [influencers, setInfluencers] = useState({
-    firstInput: priorProfile.influencers.firstInput,
-    secondInput: priorProfile.influencers.secondInput,
-    thirdInput: priorProfile.influencers.thirdInput,
-    fourthInput: priorProfile.influencers.fourthInput,
-    fifthInput: priorProfile.influencers.fifthInput,
+    firstInput: priorProfile?.influencers?.firstInput,
+    secondInput: priorProfile?.influencers?.secondInput,
+    thirdInput: priorProfile?.influencers?.thirdInput,
+    fourthInput: priorProfile?.influencers?.fourthInput,
+    fifthInput: priorProfile?.influencers?.fifthInput,
   });
   const [books, setBooks] = useState({
-    firstInput: priorProfile.books.firstInput,
-    secondInput: priorProfile.books.secondInput,
-    thirdInput: priorProfile.books.thirdInput,
-    fourthInput: priorProfile.books.fourthInput,
-    fifthInput: priorProfile.books.fifthInput,
+    firstInput: priorProfile?.books?.firstInput,
+    secondInput: priorProfile?.books?.secondInput,
+    thirdInput: priorProfile?.books?.thirdInput,
+    fourthInput: priorProfile?.books?.fourthInput,
+    fifthInput: priorProfile?.books?.fifthInput,
   });
   const [music, setMusic] = useState({
-    firstInput: priorProfile.music.firstInput,
-    secondInput: priorProfile.music.secondInput,
-    thirdInput: priorProfile.music.thirdInput,
-    fourthInput: priorProfile.music.fourthInput,
-    fifthInput: priorProfile.music.fifthInput,
+    firstInput: priorProfile?.music?.firstInput,
+    secondInput: priorProfile?.music?.secondInput,
+    thirdInput: priorProfile?.music?.thirdInput,
+    fourthInput: priorProfile?.music?.fourthInput,
+    fifthInput: priorProfile?.music?.fifthInput,
   });
   const [shows, setShows] = useState({
-    firstInput: priorProfile.shows.firstInput,
-    secondInput: priorProfile.shows.secondInput,
-    thirdInput: priorProfile.shows.thirdInput,
-    fourthInput: priorProfile.shows.fourthInput,
-    fifthInput: priorProfile.shows.fifthInput,
+    firstInput: priorProfile?.shows?.firstInput,
+    secondInput: priorProfile?.shows?.secondInput,
+    thirdInput: priorProfile?.shows?.thirdInput,
+    fourthInput: priorProfile?.shows?.fourthInput,
+    fifthInput: priorProfile?.shows?.fifthInput,
   });
 
   const updateProfile = async () => {
     try {
+      if (!name) {
+        console.log("Name is required");
+        return;
+      }
       const userRef = docs(db, "userProfiles", auth.currentUser.uid);
       await setDoc(
         userRef,
@@ -76,7 +80,7 @@ export const EditProfile = ({ navigation }) => {
         { merge: true }
       );
       console.log("Profile updated successfully");
-      navigation.navigate("My Profile");
+      navigation.goBack();
     } catch (error) {
       console.error("Error writing document: ", error);
     }
@@ -155,31 +159,31 @@ export const EditProfile = ({ navigation }) => {
         <List.Section title="Resources">
           <List.Accordion title="Textbooks">
             <TextInput
-              defaultValue={textbooks.firstInput}
+              defaultValue={priorProfile.textbooks.firstInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, firstInput: text })
               }
             />
             <TextInput
-              defaultValue={textbooks.secondInput}
+              defaultValue={priorProfile.textbooks.secondInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, secondInput: text })
               }
             />
             <TextInput
-              defaultValue={textbooks.thirdInput}
+              defaultValue={priorProfile.textbooks.thirdInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, thirdInput: text })
               }
             />
             <TextInput
-              defaultValue={textbooks.fourthInput}
+              defaultValue={priorProfile.textbooks.fourthInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, fourthInput: text })
               }
             />
             <TextInput
-              defaultValue={textbooks.fifthInput}
+              defaultValue={priorProfile.textbooks.fifthInput}
               onChangeText={(text) =>
                 setTextbooks({ ...textbooks, fifthInput: text })
               }
@@ -187,31 +191,31 @@ export const EditProfile = ({ navigation }) => {
           </List.Accordion>
           <List.Accordion title="Podcast/Youtubers">
             <TextInput
-              defaultValue={influencers.firstInput}
+              defaultValue={priorProfile.influencers.firstInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, firstInput: text })
               }
             />
             <TextInput
-              defaultValue={influencers.secondInput}
+              defaultValue={priorProfile.influencers.secondInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, secondInput: text })
               }
             />
             <TextInput
-              defaultValue={influencers.thirdInput}
+              defaultValue={priorProfile.influencers.thirdInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, thirdInput: text })
               }
             />
             <TextInput
-              defaultValue={influencers.fourthInput}
+              defaultValue={priorProfile.influencers.fourthInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, fourthInput: text })
               }
             />
             <TextInput
-              defaultValue={influencers.fifthInput}
+              defaultValue={priorProfile.influencers.fifthInput}
               onChangeText={(text) =>
                 setInfluencers({ ...influencers, fifthInput: text })
               }
@@ -219,67 +223,67 @@ export const EditProfile = ({ navigation }) => {
           </List.Accordion>
           <List.Accordion title="Books I Read">
             <TextInput
-              defaultValue={books.firstInput}
+              defaultValue={priorProfile.books.firstInput}
               onChangeText={(text) => setBooks({ ...books, firstInput: text })}
             />
             <TextInput
-              defaultValue={books.secondInput}
+              defaultValue={priorProfile.books.secondInput}
               onChangeText={(text) => setBooks({ ...books, secondInput: text })}
             />
             <TextInput
-              defaultValue={books.thirdInput}
+              defaultValue={priorProfile.books.thirdInput}
               onChangeText={(text) => setBooks({ ...books, thirdInput: text })}
             />
             <TextInput
-              defaultValue={books.fourthInput}
+              defaultValue={priorProfile.books.fourthInput}
               onChangeText={(text) => setBooks({ ...books, fourthInput: text })}
             />
             <TextInput
-              defaultValue={books.fifthInput}
+              defaultValue={priorProfile.books.fifthInput}
               onChangeText={(text) => setBooks({ ...books, fifthInput: text })}
             />
           </List.Accordion>
           <List.Accordion title="Songs/Artists">
             <TextInput
-              defaultValue={music.firstInput}
+              defaultValue={priorProfile.music.firstInput}
               onChangeText={(text) => setMusic({ ...music, firstInput: text })}
             />
             <TextInput
-              defaultValue={music.secondInput}
+              defaultValue={priorProfile.music.secondInput}
               onChangeText={(text) => setMusic({ ...music, secondInput: text })}
             />
             <TextInput
-              defaultValue={music.thirdInput}
+              defaultValue={priorProfile.music.thirdInput}
               onChangeText={(text) => setMusic({ ...music, thirdInput: text })}
             />
             <TextInput
-              defaultValue={music.fourthInput}
+              defaultValue={priorProfile.music.fourthInput}
               onChangeText={(text) => setMusic({ ...music, fourthInput: text })}
             />
             <TextInput
-              defaultValue={music.fifthInput}
+              defaultValue={priorProfile.music.fifthInput}
               onChangeText={(text) => setMusic({ ...music, fifthInput: text })}
             />
           </List.Accordion>
           <List.Accordion title="Shows/Movies">
             <TextInput
-              defaultValue={shows.firstInput}
+              defaultValue={priorProfile.shows.firstInput}
               onChangeText={(text) => setShows({ ...shows, firstInput: text })}
             />
             <TextInput
-              defaultValue={shows.secondInput}
+              defaultValue={priorProfile.shows.secondInput}
               onChangeText={(text) => setShows({ ...shows, secondInput: text })}
             />
             <TextInput
-              defaultValue={shows.thirdInput}
+              defaultValue={priorProfile.shows.thirdInput}
               onChangeText={(text) => setShows({ ...shows, thirdInput: text })}
             />
             <TextInput
-              defaultValue={shows.fourthInput}
+              defaultValue={priorProfile.shows.fourthInput}
               onChangeText={(text) => setShows({ ...shows, fourthInput: text })}
             />
             <TextInput
-              defaultValue={shows.fifthInput}
+              defaultValue={priorProfile.shows.fifthInput}
               onChangeText={(text) => setShows({ ...shows, fifthInput: text })}
             />
           </List.Accordion>
