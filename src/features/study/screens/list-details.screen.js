@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Text, FlatList } from "react-native";
 import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { auth, db } from "../../../../firebase-config";
 import {
   collection,
   addDoc,
-  getDocs,
+  getDoc,
   deleteDoc,
   doc as docs,
   updateDoc,
@@ -36,11 +36,21 @@ export const ListDetails = ({ route, navigation }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const querySnapshot = await getDocs(collection(db, "lists").doc(itemId));
-      setListOfVocab(querySnapshot);
+      const docRef = docs(db, "lists", itemId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        let data = docSnap.data();
+        const { userId, title, ...allVocab } = data;
+        const dataArray = Object.keys(allVocab).map((key) => ({
+          voc: key,
+          def: allVocab[key],
+        }));
+        setListOfVocab(dataArray);
+      } else {
+        console.log("No such document!");
+      }
     }
     fetchData();
-    // setIsLoading(false);
   }, [itemId]);
 
   // const deleteVocab = async (id, vocab) => {
@@ -51,19 +61,15 @@ export const ListDetails = ({ route, navigation }) => {
   //   const updatedDocs = [...listOfVocab].filter(!vocab);
   //   setListOfVocab(updatedDocs);
   // };
+  // console.log(listOfVocab);
 
-  // const renderLists = ({ item }) => {
-  //   return (
-  //     <ListContainer>
-  //       {/* <TouchableOpacity onPress={navigation.goBack()}> */}
-  //       {/* </TouchableOpacity> */}
-  //       <ListItems>{item.vocab}</ListItems>
-  //       {/* <TouchableOpacity onPress={() => deleteVocab(itemId, item)}>
-  //         <Icon name="trash-o" size={20} />
-  //       </TouchableOpacity> */}
-  //     </ListContainer>
-  //   );
-  // };
+  const renderLists = ({ item }) => (
+    <View>
+      <Text>
+        {item.voc} : {item.def}
+      </Text>
+    </View>
+  );
 
   return (
     <>
@@ -82,7 +88,13 @@ export const ListDetails = ({ route, navigation }) => {
           <Text>Add</Text>
         </TouchableOpacity>
       </View>
-      {/* <View>{renderLists}</View> */}
+      <View>
+        <FlatList
+          data={listOfVocab}
+          renderItem={renderLists}
+          keyExtractor={(item) => item[0]}
+        />
+      </View>
     </>
   );
 };
