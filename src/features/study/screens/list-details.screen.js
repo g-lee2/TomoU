@@ -28,7 +28,7 @@ export const ListDetails = ({ route, navigation }) => {
   const addNewVocab = async (vocab, def) => {
     const docRef = docs(db, "lists", itemId);
     await updateDoc(docRef, {
-      vocab: def,
+      [vocab]: def,
     });
     setVocabulary("");
     setDefinition("");
