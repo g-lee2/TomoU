@@ -41,17 +41,19 @@ export const ListDetails = ({ route, navigation }) => {
       if (docSnap.exists()) {
         let data = docSnap.data();
         const { userId, title, ...allVocab } = data;
-        const dataArray = Object.keys(allVocab).map((key) => ({
-          voc: key,
-          def: allVocab[key],
-        }));
+        const dataArray = Object.keys(allVocab)
+          .map((key) => ({
+            voc: key,
+            def: allVocab[key],
+          }))
+          .sort((a, b) => a.word.localeCompare(b.word));
         setListOfVocab(dataArray);
       } else {
         console.log("No such document!");
       }
     }
     fetchData();
-  }, [itemId]);
+  }, [itemId, listOfVocab]);
 
   // const deleteVocab = async (id, vocab) => {
   //   const docRef = docs(db, "lists", id);
