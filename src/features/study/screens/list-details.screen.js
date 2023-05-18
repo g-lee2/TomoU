@@ -46,7 +46,7 @@ export const ListDetails = ({ route, navigation }) => {
             voc: key,
             def: allVocab[key],
           }))
-          .sort((a, b) => a.word.localeCompare(b.word));
+          .sort((a, b) => (a.def.toLowerCase() > b.def.toLowerCase() ? 1 : -1));
         setListOfVocab(dataArray);
       } else {
         console.log("No such document!");
@@ -94,7 +94,7 @@ export const ListDetails = ({ route, navigation }) => {
         <FlatList
           data={listOfVocab}
           renderItem={renderLists}
-          keyExtractor={(item) => item[0]}
+          keyExtractor={(item) => item.voc}
         />
       </View>
     </>
