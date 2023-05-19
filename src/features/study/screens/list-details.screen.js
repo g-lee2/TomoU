@@ -55,21 +55,23 @@ export const ListDetails = ({ route, navigation }) => {
     fetchData();
   }, [itemId, listOfVocab]);
 
-  // const deleteVocab = async (id, vocab) => {
-  //   const docRef = docs(db, "lists", id);
-  //   await updateDoc(docRef, {
-  //     vocab: deleteField(),
-  //   });
-  //   const updatedDocs = [...listOfVocab].filter(!vocab);
-  //   setListOfVocab(updatedDocs);
-  // };
-  // console.log(listOfVocab);
+  const deleteVocab = async (vocab) => {
+    const docRef = docs(db, "lists", itemId);
+    await updateDoc(docRef, {
+      [vocab]: deleteField(),
+    });
+    const updatedDocs = [...listOfVocab].filter(() => !vocab);
+    setListOfVocab(updatedDocs);
+  };
 
   const renderLists = ({ item }) => (
     <View>
       <Text>
         {item.voc} : {item.def}
       </Text>
+      <TouchableOpacity onPress={() => deleteVocab(item.voc)}>
+        <Icon name="trash-o" size={20} />
+      </TouchableOpacity>
     </View>
   );
 
