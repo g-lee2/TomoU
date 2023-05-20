@@ -2,27 +2,18 @@ import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, Text, FlatList } from "react-native";
 import { TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { auth, db } from "../../../../firebase-config";
+import { db } from "../../../../firebase-config";
 import {
-  collection,
-  addDoc,
   getDoc,
-  deleteDoc,
   doc as docs,
   updateDoc,
   deleteField,
-  setDoc,
 } from "firebase/firestore";
-import {
-  ListContainer,
-  ListItems,
-} from "../components/study-screen-styles.component";
 
 export const ListDetails = ({ route, navigation }) => {
   const [listOfVocab, setListOfVocab] = useState();
   const [vocabulary, setVocabulary] = useState();
   const [definition, setDefinition] = useState();
-  // const [isLoading, setIsLoading] = useState(true);
   const { itemId } = route.params;
 
   const addNewVocab = async (vocab, def) => {
