@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { HomeTab } from "../../features/home/screens/home.screen";
 import { StudyStackNavigator } from "./study.navigator";
 import { ProfileStackNavigator } from "./profile.navigator";
-import { SearchTab } from "../../features/search/screens/search.screen";
+import { SearchStackNavigator } from "./search.navigator";
 import { ProfileTab } from "../../features/profile/screens/profile.screen";
 
 const screenOptions = ({ route }) => {
@@ -38,7 +38,7 @@ export const AppNavigator = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name="Home" component={HomeTab} />
-      <Tab.Screen name="Search" component={SearchTab} />
+      <Tab.Screen name="Search" component={SearchStackNavigator} />
       <Tab.Screen name="Study" component={StudyStackNavigator} />
       <Tab.Screen name="Profile" component={ProfileStackNavigator} />
     </Tab.Navigator>

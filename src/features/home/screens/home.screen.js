@@ -7,33 +7,26 @@ import {
   collection,
   addDoc,
   getDocs,
-  deleteDoc,
-  doc as docs,
   orderBy,
   startAfter,
   limit,
   query,
 } from "firebase/firestore";
 import { ProfileContext } from "../../../services/profile/profile-info.context";
-import {
-  PostView,
-  PostHeader,
-  ProfilePicture,
-  PostName,
-  PostDateTime,
-  PostContent,
-} from "../components/home.styles";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 export const HomeTab = () => {
   const [postList, setPostList] = useState();
   const [postContent, setPostContent] = useState();
   const { priorProfile } = useContext(ProfileContext);
+  const { user } = useContext(AuthenticationContext);
 
   const createNewPost = async () => {
     await addDoc(collection(db, "posts"), {
       name: priorProfile.name,
       dateAndTime: new Date().toString(),
       content: postContent,
+      userId: user.uid,
     });
     setPostContent("");
   };

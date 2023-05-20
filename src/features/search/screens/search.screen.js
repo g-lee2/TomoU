@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, ScrollView } from "react-native";
+import { TouchableOpacity, ScrollView, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { InstituteInfoCard } from "../components/institute-info-card.component";
 import {
@@ -11,8 +11,9 @@ import {
 } from "../components/search.styles";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../../firebase-config";
+import Icon from "react-native-vector-icons/Ionicons";
 
-export const SearchTab = () => {
+export const SearchTab = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [instituteInfoCards, setInstituteInfoCards] = useState([]);
   const [selectedChip, setSelectedChip] = useState(null);
@@ -36,6 +37,7 @@ export const SearchTab = () => {
             name={data.Name}
             address={data.Address}
             image={data.Image}
+            url={data.Url}
           />
         );
       });
@@ -110,9 +112,22 @@ export const SearchTab = () => {
         </ScrollView>
       </ChipContainer>
       <ScrollView>
-        {instituteInfoCards.filter((card) =>
-          card.props.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )}
+        {instituteInfoCards
+          .filter((card) =>
+            card.props.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+          .map((card, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => {
+                navigation.navigate("School Details", {
+                  schoolUrl: card.props.url,
+                });
+              }}
+            >
+              {card}
+            </TouchableOpacity>
+          ))}
         <ActivityIndicator size="large" color="#0000ff" animating={isLoading} />
       </ScrollView>
     </SafeArea>
