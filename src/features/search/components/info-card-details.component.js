@@ -6,6 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { ProfileContext } from "../../../services/profile/profile-info.context";
+import { SearchContext } from "../../../services/search/search.context";
 import { db } from "../../../../firebase-config";
 import {
   getDoc,
@@ -96,10 +97,9 @@ export const InfoCardDetails = ({ route, navigation }) => {
     schoolAddress,
     schoolId,
   } = route.params;
-  const { user } = useContext(AuthenticationContext);
+  const { isStudent, setIsStudent } = useContext(SearchContext);
   const { priorProfile } = useContext(ProfileContext);
   const [attendees, setAttendees] = useState();
-  const [isStudent, setIsStudent] = useState(false);
 
   const iconShown = isStudent ? (
     <SchoolIcon
