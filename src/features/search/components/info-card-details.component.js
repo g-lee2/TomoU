@@ -3,9 +3,13 @@ import { Text, TouchableOpacity, FlatList, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import styled from "styled-components/native";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { ProfileContext } from "../../../services/profile/profile-info.context";
-import { SearchContext } from "../../../services/search/search.context";
+import {
+  SearchContext,
+  SearchContextProvider,
+} from "../../../services/search/search.context";
 import { db } from "../../../../firebase-config";
 import {
   getDoc,
@@ -13,6 +17,52 @@ import {
   updateDoc,
   deleteField,
 } from "firebase/firestore";
+const Container = styled.View`
+  flex: 1;
+  padding: 20px;
+`;
+
+const SchoolName = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
+
+const BackIcon = styled(Icon)`
+  font-size: 30px;
+  margin-bottom: 10px;
+`;
+
+const SchoolUrl = styled.Text`
+  font-size: 16px;
+  margin-bottom: 20px;
+`;
+
+const SchoolIcon = styled(Ionicons)`
+  font-size: 24px;
+  margin-bottom: 10px;
+`;
+
+const AttendeesContainer = styled.View`
+  margin-top: 20px;
+`;
+
+const AttendeeItem = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const AttendeeAvatar = styled(Avatar.Icon).attrs({
+  size: 80,
+  icon: "account",
+})`
+  margin-right: 10px;
+`;
+
+const AttendeeName = styled.Text`
+  font-size: 18px;
+`;
 
 export const InfoCardDetails = ({ route, navigation }) => {
   const { schoolUrl, schoolName, schoolImage, schoolAddress, schoolId } =
@@ -39,7 +89,9 @@ export const InfoCardDetails = ({ route, navigation }) => {
         await updateDoc(docRef, {
           [user.uid]: deleteField(),
         });
-        const updatedDocs = [...attendees].filter((uid) => uid !== user.uid);
+        const updatedDocs = Object.keys(attendees).filter(
+          (uid) => uid !== user.uid
+        );
         setAttendees(updatedDocs);
       }
     } catch (error) {
@@ -47,49 +99,32 @@ export const InfoCardDetails = ({ route, navigation }) => {
     }
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      const docRef = docs(db, "schools", schoolId);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        let data = docSnap.data();
-        const { Address, Name, Image, Url, Region, ...allStudents } = data;
-        setAttendees(allStudents);
-      } else {
-        console.log("No such document!");
-      }
-    }
-    fetchData();
-  }, [attendees, schoolId]);
-
-  const renderLists = ({ item }) => {
-    return (
-      <>
-        <Avatar.Icon size={80} icon="account" />
-        <Text>{item.uid}</Text>
-      </>
-    );
-  };
-
   return (
-    <>
-      <Text>{schoolName}</Text>
-      <Icon name="angle-left" size={30} onPress={() => navigation.goBack()} />
-      <Text>{schoolUrl}</Text>
-      <Ionicons
-        name={iconShown}
-        onPress={() => {
-          setIcon();
-          addRemoveStudent();
-        }}
-      />
-      <View>
-        <FlatList
-          data={attendees}
-          renderItem={renderLists}
-          keyExtractor={(item) => item.student}
+    <SearchContextProvider>
+      <Container>
+        <SchoolName>{schoolName}</SchoolName>
+        <BackIcon name="angle-left" onPress={() => navigation.goBack()} />
+        <SchoolUrl>{schoolUrl}</SchoolUrl>
+        <SchoolIcon
+          name={iconShown}
+          onPress={() => {
+            setIcon();
+            addRemoveStudent();
+          }}
         />
-      </View>
-    </>
+        <AttendeesContainer>
+          <FlatList
+            data={Object.keys(attendees)}
+            renderItem={({ item }) => (
+              <AttendeeItem>
+                <AttendeeAvatar />
+                <AttendeeName>{item}</AttendeeName>
+              </AttendeeItem>
+            )}
+            keyExtractor={(item) => item}
+          />
+        </AttendeesContainer>
+      </Container>
+    </SearchContextProvider>
   );
 };

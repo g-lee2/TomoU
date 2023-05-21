@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, FlatList } from "react-native";
-import { TextInput, Chip, ActivityIndicator } from "react-native-paper";
+import { TextInput, Chip } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {
   StyledListView,
   TextView,
-  ChipView,
+  ButtonView,
   ListItems,
   ListContainer,
+  PostInput,
+  PostButton,
+  ActivityIndicator,
 } from "../components/study-screen-styles.component";
 import { auth, db } from "../../../../firebase-config";
 import {
@@ -72,21 +75,19 @@ export const StudyTab = ({ navigation }) => {
   return (
     <>
       <StyledListView>
-        <TextView>
-          <TextInput value={newList} onChangeText={setNewList} />
-        </TextView>
-        <ChipView>
-          <TouchableOpacity onPress={() => addNewList(newList)}>
-            <Chip>Add</Chip>
-          </TouchableOpacity>
-        </ChipView>
+        <PostInput value={newList} onChangeText={setNewList} />
+        <ButtonView>
+          <PostButton onPress={() => addNewList(newList)} title="Add">
+            Add
+          </PostButton>
+        </ButtonView>
       </StyledListView>
       <FlatList
         data={listOfLists}
         renderItem={renderLists}
         keyExtractor={(item) => item.id}
       />
-      <ActivityIndicator size="large" color="#0000ff" animating={isLoading} />
+      <ActivityIndicator animating={isLoading} />
     </>
   );
 };

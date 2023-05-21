@@ -9,6 +9,17 @@ import {
   updateDoc,
   deleteField,
 } from "firebase/firestore";
+import {
+  StyledView,
+  StyledTextInput,
+  StyledTouchableOpacity,
+  ButtonText,
+  StyledFlatList,
+  ListItemContainer,
+  ListItemText,
+  DeleteButton,
+  DeleteIcon,
+} from "../components/study-screen-styles.component";
 
 export const ListDetails = ({ route, navigation }) => {
   const [listOfVocab, setListOfVocab] = useState();
@@ -56,40 +67,36 @@ export const ListDetails = ({ route, navigation }) => {
   };
 
   const renderLists = ({ item }) => (
-    <View>
-      <Text>
-        {item.voc} : {item.def}
-      </Text>
-      <TouchableOpacity onPress={() => deleteVocab(item.voc)}>
-        <Icon name="trash-o" size={20} />
-      </TouchableOpacity>
-    </View>
+    <ListItemContainer>
+      <ListItemText>{`${item.voc} : ${item.def}`}</ListItemText>
+      <DeleteButton onPress={() => deleteVocab(item.voc)}>
+        <DeleteIcon />
+      </DeleteButton>
+    </ListItemContainer>
   );
 
   return (
-    <>
-      <View>
-        <TextInput
-          placeholder="Vocabulary"
-          value={vocabulary}
-          onChangeText={(v) => setVocabulary(v)}
-        />
-        <TextInput
-          placeholder="Definition"
-          value={definition}
-          onChangeText={(d) => setDefinition(d)}
-        />
-        <TouchableOpacity onPress={() => addNewVocab(vocabulary, definition)}>
-          <Text>Add</Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <FlatList
-          data={listOfVocab}
-          renderItem={renderLists}
-          keyExtractor={(item) => item.voc}
-        />
-      </View>
-    </>
+    <StyledView>
+      <StyledTextInput
+        placeholder="Vocabulary"
+        value={vocabulary}
+        onChangeText={(v) => setVocabulary(v)}
+      />
+      <StyledTextInput
+        placeholder="Definition"
+        value={definition}
+        onChangeText={(d) => setDefinition(d)}
+      />
+      <StyledTouchableOpacity
+        onPress={() => addNewVocab(vocabulary, definition)}
+      >
+        <ButtonText>Add</ButtonText>
+      </StyledTouchableOpacity>
+      <StyledFlatList
+        data={listOfVocab}
+        renderItem={renderLists}
+        keyExtractor={(item) => item.voc}
+      />
+    </StyledView>
   );
 };
