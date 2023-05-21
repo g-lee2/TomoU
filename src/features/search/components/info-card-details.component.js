@@ -6,10 +6,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import styled from "styled-components/native";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { ProfileContext } from "../../../services/profile/profile-info.context";
-import {
-  SearchContext,
-  SearchContextProvider,
-} from "../../../services/search/search.context";
 import { db } from "../../../../firebase-config";
 import {
   getDoc,
@@ -17,6 +13,20 @@ import {
   updateDoc,
   deleteField,
 } from "firebase/firestore";
+import MapView, { Marker } from "react-native-maps";
+
+const SchoolAddress = styled.Text`
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+`;
+
+const SchoolImage = styled.Image`
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+`;
+
 const Container = styled.View`
   flex: 1;
   padding: 20px;
@@ -65,66 +75,113 @@ const AttendeeName = styled.Text`
 `;
 
 export const InfoCardDetails = ({ route, navigation }) => {
-  const { schoolUrl, schoolName, schoolImage, schoolAddress, schoolId } =
-    route.params;
+  const {
+    schoolUrl,
+    schoolName,
+    schoolLong,
+    schoolLat,
+    schoolAddress,
+    schoolId,
+  } = route.params;
   const { user } = useContext(AuthenticationContext);
   const { priorProfile } = useContext(ProfileContext);
-  const { attendees, setAttendees, isStudent, setIsStudent } =
-    useContext(SearchContext);
+  const [attendees, setAttendees] = useState();
+  const [isStudent, setIsStudent] = useState(false);
 
-  const iconShown = isStudent ? "school" : "school-outline";
+  const iconShown = isStudent ? (
+    <SchoolIcon
+      name="school"
+      onPress={() => {
+        setIcon();
+        removeStudent();
+      }}
+    />
+  ) : (
+    <SchoolIcon
+      name="school-outline"
+      onPress={() => {
+        setIcon();
+        addStudent();
+      }}
+    />
+  );
 
   const setIcon = () => {
     return setIsStudent((prevState) => !prevState);
   };
 
-  const addRemoveStudent = async () => {
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const docRef = docs(db, "schools", schoolId);
+  //     const docSnap = await getDoc(docRef);
+  //     if (docSnap.exists()) {
+  //       let data = docSnap.data();
+  //       const { Address, Name, Image, Url, Region, ...allStudents } = data;
+  //       setAttendees(allStudents);
+  //     } else {
+  //       console.log("No such document!");
+  //     }
+  //   }
+  //   fetchData();
+  // }, [schoolId, attendees]);
+
+  const addStudent = async () => {
     try {
       const docRef = docs(db, "schools", schoolId);
-      if (!isStudent) {
-        await updateDoc(docRef, {
-          [user.uid]: priorProfile.name,
-        });
-      } else {
-        await updateDoc(docRef, {
-          [user.uid]: deleteField(),
-        });
-        const updatedDocs = Object.keys(attendees).filter(
-          (uid) => uid !== user.uid
-        );
-        setAttendees(updatedDocs);
-      }
+      await updateDoc(docRef, {
+        [user.uid]: priorProfile.name,
+      });
     } catch (error) {
       console.log("Error updating document: ", error);
     }
   };
 
+  const removeStudent = async () => {
+    const docRef = docs(db, "schools", schoolId);
+    await updateDoc(docRef, {
+      [user.uid]: deleteField(),
+    });
+    const updatedDocs = [...attendees].filter(() => !user.uid);
+    setAttendees(updatedDocs);
+  };
+
   return (
-    <SearchContextProvider>
-      <Container>
-        <SchoolName>{schoolName}</SchoolName>
-        <BackIcon name="angle-left" onPress={() => navigation.goBack()} />
-        <SchoolUrl>{schoolUrl}</SchoolUrl>
-        <SchoolIcon
-          name={iconShown}
-          onPress={() => {
-            setIcon();
-            addRemoveStudent();
+    <Container>
+      {iconShown}
+      <BackIcon name="angle-left" onPress={() => navigation.goBack()} />
+      <SchoolName>{schoolName}</SchoolName>
+      <SchoolUrl>Website: {schoolUrl}</SchoolUrl>
+      <SchoolAddress>Address: {schoolAddress}</SchoolAddress>
+      <MapView
+        style={{ width: 350, height: 200 }}
+        initialRegion={{
+          latitude: schoolLong,
+          longitude: schoolLat,
+          latitudeDelta: 0.4,
+          longitudeDelta: 0.4,
+        }}
+      >
+        <Marker
+          title={schoolName}
+          pinColor="red"
+          coordinate={{
+            latitude: schoolLat,
+            longitude: schoolLong,
           }}
         />
-        <AttendeesContainer>
-          <FlatList
-            data={Object.keys(attendees)}
-            renderItem={({ item }) => (
-              <AttendeeItem>
-                <AttendeeAvatar />
-                <AttendeeName>{item}</AttendeeName>
-              </AttendeeItem>
-            )}
-            keyExtractor={(item) => item}
-          />
-        </AttendeesContainer>
-      </Container>
-    </SearchContextProvider>
+      </MapView>
+      {/* <AttendeesContainer>
+        <FlatList
+          data={attendees}
+          renderItem={({ item }) => (
+            <AttendeeItem>
+              <AttendeeAvatar />
+              <AttendeeName>{item.student}</AttendeeName>
+            </AttendeeItem>
+          )}
+          keyExtractor={(item) => item}
+        />
+      </AttendeesContainer> */}
+    </Container>
   );
 };
