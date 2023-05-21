@@ -39,6 +39,7 @@ export const SearchTab = ({ navigation }) => {
             url={data.Url}
             longitude={data.Long}
             latitude={data.Lat}
+            schoolId={doc.id}
           />
         );
       });
@@ -126,7 +127,7 @@ export const SearchTab = ({ navigation }) => {
                   schoolName: card.props.name,
                   schoolImage: card.props.image,
                   schoolAddress: card.props.address,
-                  schoolId: card.props.id,
+                  schoolId: card.props.schoolId,
                   schoolLong: card.props.longitude,
                   schoolLat: card.props.latitude,
                 });

@@ -30,6 +30,12 @@ const SchoolImage = styled.Image`
 const Container = styled.View`
   flex: 1;
   padding: 20px;
+  background-color: white;
+`;
+
+const ButtonContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const SchoolName = styled.Text`
@@ -55,6 +61,7 @@ const SchoolIcon = styled(Ionicons)`
 
 const AttendeesContainer = styled.View`
   margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 const AttendeeItem = styled.View`
@@ -64,7 +71,7 @@ const AttendeeItem = styled.View`
 `;
 
 const AttendeeAvatar = styled(Avatar.Icon).attrs({
-  size: 80,
+  size: 30,
   icon: "account",
 })`
   margin-right: 10px;
@@ -72,6 +79,12 @@ const AttendeeAvatar = styled(Avatar.Icon).attrs({
 
 const AttendeeName = styled.Text`
   font-size: 18px;
+`;
+
+const CurrentStudents = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 export const InfoCardDetails = ({ route, navigation }) => {
@@ -110,26 +123,35 @@ export const InfoCardDetails = ({ route, navigation }) => {
     return setIsStudent((prevState) => !prevState);
   };
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const docRef = docs(db, "schools", schoolId);
-  //     const docSnap = await getDoc(docRef);
-  //     if (docSnap.exists()) {
-  //       let data = docSnap.data();
-  //       const { Address, Name, Image, Url, Region, ...allStudents } = data;
-  //       setAttendees(allStudents);
-  //     } else {
-  //       console.log("No such document!");
-  //     }
-  //   }
-  //   fetchData();
-  // }, [schoolId, attendees]);
+  useEffect(() => {
+    async function fetchData() {
+      const docRef = docs(db, "schools", schoolId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        let data = docSnap.data();
+        const { Address, Name, Image, Url, Region, Lat, Long, ...allStudents } =
+          data;
+        const dataArray = Object.keys(allStudents)
+          .map((key) => ({
+            student: key,
+            name: allStudents[key],
+          }))
+          .sort((a, b) =>
+            a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+          );
+        setAttendees(dataArray);
+      } else {
+        console.log("No such document!");
+      }
+    }
+    fetchData();
+  }, [schoolId, attendees]);
 
   const addStudent = async () => {
     try {
       const docRef = docs(db, "schools", schoolId);
       await updateDoc(docRef, {
-        [user.uid]: priorProfile.name,
+        [priorProfile.userId]: priorProfile.name,
       });
     } catch (error) {
       console.log("Error updating document: ", error);
@@ -139,16 +161,18 @@ export const InfoCardDetails = ({ route, navigation }) => {
   const removeStudent = async () => {
     const docRef = docs(db, "schools", schoolId);
     await updateDoc(docRef, {
-      [user.uid]: deleteField(),
+      [priorProfile.userId]: deleteField(),
     });
-    const updatedDocs = [...attendees].filter(() => !user.uid);
+    const updatedDocs = attendees.filter(() => !priorProfile.userId);
     setAttendees(updatedDocs);
   };
 
   return (
     <Container>
-      {iconShown}
-      <BackIcon name="angle-left" onPress={() => navigation.goBack()} />
+      <ButtonContainer>
+        <BackIcon name="angle-left" onPress={() => navigation.goBack()} />
+        {iconShown}
+      </ButtonContainer>
       <SchoolName>{schoolName}</SchoolName>
       <SchoolUrl>Website: {schoolUrl}</SchoolUrl>
       <SchoolAddress>Address: {schoolAddress}</SchoolAddress>
@@ -167,18 +191,19 @@ export const InfoCardDetails = ({ route, navigation }) => {
           coordinate={{ longitude: schoolLat, latitude: schoolLong }}
         />
       </MapView>
-      {/* <AttendeesContainer>
+      <AttendeesContainer>
+        <CurrentStudents>Current Students:</CurrentStudents>
         <FlatList
           data={attendees}
           renderItem={({ item }) => (
             <AttendeeItem>
               <AttendeeAvatar />
-              <AttendeeName>{item.student}</AttendeeName>
+              <AttendeeName>{item.name}</AttendeeName>
             </AttendeeItem>
           )}
           keyExtractor={(item) => item}
         />
-      </AttendeesContainer> */}
+      </AttendeesContainer>
     </Container>
   );
 };
