@@ -8,6 +8,8 @@ export const colors = {
     primary: "#3F9D66",
     secondary: "#60B28E",
     muted: "#C7ECD9",
+    dark: "#023020",
+    light: "#ccd6d2",
   },
   brandPurple: {
     primary: "#7A4ABD",

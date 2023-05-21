@@ -7,17 +7,20 @@ import {
   PostName,
   PostDateTime,
   PostContent,
+  PostCard,
+  PostTitle,
+  PostDetails,
 } from "./home.styles";
 
 export const Post = (props) => {
   return (
-    <PostView>
-      <PostHeader>
-        <ProfilePicture size={80} icon="account" />
-        <PostName>{props.name}</PostName>
+    <PostCard>
+      <ProfilePicture size={80} icon="account" />
+      <PostDetails>
+        <PostTitle>{props.name}</PostTitle>
+        <PostContent>{props.post}</PostContent>
         <PostDateTime>{props.date}</PostDateTime>
-      </PostHeader>
-      <PostContent>{props.post}</PostContent>
-    </PostView>
+      </PostDetails>
+    </PostCard>
   );
 };

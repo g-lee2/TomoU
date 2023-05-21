@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { ProfileContext } from "../../../services/profile/profile-info.context";
+import { SearchContext } from "../../../services/search/search.context";
 import { db } from "../../../../firebase-config";
 import {
   getDoc,
@@ -16,15 +17,15 @@ import {
 export const InfoCardDetails = ({ route, navigation }) => {
   const { schoolUrl, schoolName, schoolImage, schoolAddress, schoolId } =
     route.params;
-  const [isStudent, setIsStuent] = useState(false);
-  const [attendees, setAttendees] = useState();
   const { user } = useContext(AuthenticationContext);
   const { priorProfile } = useContext(ProfileContext);
+  const { attendees, setAttendees, isStudent, setIsStudent } =
+    useContext(SearchContext);
 
   const iconShown = isStudent ? "school" : "school-outline";
 
   const setIcon = () => {
-    return setIsStuent((prevState) => !prevState);
+    return setIsStudent((prevState) => !prevState);
   };
 
   const addRemoveStudent = async () => {
@@ -53,12 +54,7 @@ export const InfoCardDetails = ({ route, navigation }) => {
       if (docSnap.exists()) {
         let data = docSnap.data();
         const { Address, Name, Image, Url, Region, ...allStudents } = data;
-        const dataArray = Object.keys(allStudents)
-          .map((key) => ({
-            student: key,
-          }))
-          .sort();
-        setAttendees(dataArray);
+        setAttendees(allStudents);
       } else {
         console.log("No such document!");
       }
@@ -80,14 +76,13 @@ export const InfoCardDetails = ({ route, navigation }) => {
       <Text>{schoolName}</Text>
       <Icon name="angle-left" size={30} onPress={() => navigation.goBack()} />
       <Text>{schoolUrl}</Text>
-      <TouchableOpacity
+      <Ionicons
+        name={iconShown}
         onPress={() => {
           setIcon();
           addRemoveStudent();
         }}
-      >
-        <Ionicons name={iconShown} />
-      </TouchableOpacity>
+      />
       <View>
         <FlatList
           data={attendees}

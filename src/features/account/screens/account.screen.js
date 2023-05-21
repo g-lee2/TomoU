@@ -1,44 +1,23 @@
-import React from "react";
-import { Text } from "react-native";
-import styled from "styled-components";
-import { Button } from "react-native-paper";
-import { CenteredContainer } from "../components/account.styles";
-
-const AccountContainer = styled.View`
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: ${(props) => props.theme.space[4]};
-  margin-top: ${(props) => props.theme.space[2]};
-  width: 80%;
-`;
-
-const AuthButton = styled(Button)`
-  padding: ${(props) => props.theme.space[2]};
-  border-radius: 4px;
-  background-color: ${(props) => props.theme.colors.brandBlue.primary};
-`;
+import React, { useEffect } from "react";
+import {
+  BackgroundImage,
+  AppName,
+  Overlay,
+} from "../components/account.styles";
 
 export const AccountScreen = ({ navigation }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate("Login");
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [navigation]);
+
   return (
-    <CenteredContainer>
-      <AccountContainer>
-        <Text>TomoU</Text>
-        <AuthButton
-          icon="login"
-          mode="contained"
-          color="blue"
-          onPress={() => navigation.navigate("Login")}
-        >
-          Login
-        </AuthButton>
-        <AuthButton
-          icon="email"
-          mode="contained"
-          color="blue"
-          onPress={() => navigation.navigate("Register")}
-        >
-          Register
-        </AuthButton>
-      </AccountContainer>
-    </CenteredContainer>
+    <BackgroundImage>
+      <Overlay>
+        <AppName>TomoU</AppName>
+      </Overlay>
+    </BackgroundImage>
   );
 };

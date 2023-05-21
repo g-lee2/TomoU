@@ -14,6 +14,12 @@ import {
 } from "firebase/firestore";
 import { ProfileContext } from "../../../services/profile/profile-info.context";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import {
+  ScreenContainer,
+  PostInputContainer,
+  PostInput,
+  PostButton,
+} from "../components/home.styles";
 
 export const HomeTab = () => {
   const [postList, setPostList] = useState();
@@ -56,16 +62,18 @@ export const HomeTab = () => {
   }, [postList]);
 
   return (
-    <View>
-      <TextInput
-        value={postContent}
-        label="Write something..."
-        onChangeText={(p) => setPostContent(p)}
-      />
-      <TouchableOpacity onPress={createNewPost}>
-        <Text>Post</Text>
-      </TouchableOpacity>
+    <ScreenContainer>
+      <PostInputContainer>
+        <PostInput
+          value={postContent}
+          label="Write something..."
+          onChangeText={(p) => setPostContent(p)}
+        />
+        <PostButton onPress={createNewPost} title="Post">
+          Post
+        </PostButton>
+      </PostInputContainer>
       {postList}
-    </View>
+    </ScreenContainer>
   );
 };

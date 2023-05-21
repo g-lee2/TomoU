@@ -3,11 +3,13 @@ import {
   ProfileView,
   StyledChipJapan,
   StyledChipJlpt,
-  ChipContainer,
-  NameBioTextInput,
+  EditProfileInput,
+  ChipScrollContainer,
+  SaveButton,
+  ScreenContainer,
 } from "../components/profile.styles";
 import { ScrollView, View } from "react-native";
-import { List, Avatar, TextInput } from "react-native-paper";
+import { List, Avatar } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button } from "react-native-paper";
 import { db, auth } from "../../../../firebase-config";
@@ -56,18 +58,18 @@ export const EditProfile = ({ navigation }) => {
   };
 
   return (
-    <>
+    <ScreenContainer>
       <Icon name="arrow-left" size={20} onPress={() => navigation.goBack()} />
       <ProfileView>
         <Avatar.Icon size={80} icon="account" />
       </ProfileView>
       <ProfileView>
-        <NameBioTextInput
+        <EditProfileInput
           defaultValue={name}
           placeholder="name"
           onChangeText={(n) => setName(n)}
         />
-        <TextInput
+        <EditProfileInput
           defaultValue={bio}
           placeholder="bio"
           multiline={true}
@@ -75,7 +77,7 @@ export const EditProfile = ({ navigation }) => {
         />
       </ProfileView>
       <View>
-        <ChipContainer>
+        <ChipScrollContainer>
           <StyledChipJlpt
             onPress={() => setJlptLevel("JLPT N1")}
             selected={jlptLevel === "JLPT N1"}
@@ -88,8 +90,6 @@ export const EditProfile = ({ navigation }) => {
           >
             JLPT N2
           </StyledChipJlpt>
-        </ChipContainer>
-        <ChipContainer>
           <StyledChipJlpt
             onPress={() => setJlptLevel("JLPT N3")}
             selected={jlptLevel === "JLPT N3"}
@@ -108,8 +108,6 @@ export const EditProfile = ({ navigation }) => {
           >
             JLPT N5
           </StyledChipJlpt>
-        </ChipContainer>
-        <ChipContainer>
           <StyledChipJapan
             onPress={() => setLivesInJapan(true)}
             selected={livesInJapan === true}
@@ -122,12 +120,12 @@ export const EditProfile = ({ navigation }) => {
           >
             &#x1F4CD; Outside Japan
           </StyledChipJapan>
-        </ChipContainer>
+        </ChipScrollContainer>
       </View>
       <ScrollView>
         <List.Section title="Resources">
           <List.Accordion title="Textbooks">
-            <TextInput
+            <EditProfileInput
               defaultValue={textbooks[0]}
               onChangeText={(text) => {
                 let updatedTextbooks = [...textbooks];
@@ -135,7 +133,7 @@ export const EditProfile = ({ navigation }) => {
                 setTextbooks(updatedTextbooks);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={textbooks[1]}
               onChangeText={(text) => {
                 let updatedTextbooks = [...textbooks];
@@ -143,7 +141,7 @@ export const EditProfile = ({ navigation }) => {
                 setTextbooks(updatedTextbooks);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={textbooks[2]}
               onChangeText={(text) => {
                 let updatedTextbooks = [...textbooks];
@@ -151,7 +149,7 @@ export const EditProfile = ({ navigation }) => {
                 setTextbooks(updatedTextbooks);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={textbooks[3]}
               onChangeText={(text) => {
                 let updatedTextbooks = [...textbooks];
@@ -159,7 +157,7 @@ export const EditProfile = ({ navigation }) => {
                 setTextbooks(updatedTextbooks);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={textbooks[4]}
               onChangeText={(text) => {
                 let updatedTextbooks = [...textbooks];
@@ -169,7 +167,7 @@ export const EditProfile = ({ navigation }) => {
             />
           </List.Accordion>
           <List.Accordion title="Podcast/Youtubers">
-            <TextInput
+            <EditProfileInput
               defaultValue={influencers[0]}
               onChangeText={(text) => {
                 let updatedInfluencers = [...influencers];
@@ -177,7 +175,7 @@ export const EditProfile = ({ navigation }) => {
                 setInfluencers(updatedInfluencers);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={influencers[1]}
               onChangeText={(text) => {
                 let updatedInfluencers = [...influencers];
@@ -185,7 +183,7 @@ export const EditProfile = ({ navigation }) => {
                 setInfluencers(updatedInfluencers);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={influencers[2]}
               onChangeText={(text) => {
                 let updatedInfluencers = [...influencers];
@@ -193,7 +191,7 @@ export const EditProfile = ({ navigation }) => {
                 setInfluencers(updatedInfluencers);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={influencers[3]}
               onChangeText={(text) => {
                 let updatedInfluencers = [...influencers];
@@ -201,7 +199,7 @@ export const EditProfile = ({ navigation }) => {
                 setInfluencers(updatedInfluencers);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={influencers[4]}
               onChangeText={(text) => {
                 let updatedInfluencers = [...influencers];
@@ -211,7 +209,7 @@ export const EditProfile = ({ navigation }) => {
             />
           </List.Accordion>
           <List.Accordion title="Books I Read">
-            <TextInput
+            <EditProfileInput
               defaultValue={books[0]}
               onChangeText={(text) => {
                 let updatedBooks = [...books];
@@ -219,7 +217,7 @@ export const EditProfile = ({ navigation }) => {
                 setBooks(updatedBooks);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={books[1]}
               onChangeText={(text) => {
                 let updatedBooks = [...books];
@@ -227,7 +225,7 @@ export const EditProfile = ({ navigation }) => {
                 setBooks(updatedBooks);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={books[2]}
               onChangeText={(text) => {
                 let updatedBooks = [...books];
@@ -235,7 +233,7 @@ export const EditProfile = ({ navigation }) => {
                 setBooks(updatedBooks);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={books[3]}
               onChangeText={(text) => {
                 let updatedBooks = [...books];
@@ -243,7 +241,7 @@ export const EditProfile = ({ navigation }) => {
                 setBooks(updatedBooks);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={books[4]}
               onChangeText={(text) => {
                 let updatedBooks = [...books];
@@ -253,7 +251,7 @@ export const EditProfile = ({ navigation }) => {
             />
           </List.Accordion>
           <List.Accordion title="Songs/Artists">
-            <TextInput
+            <EditProfileInput
               defaultValue={music[0]}
               onChangeText={(text) => {
                 let updatedMusic = [...music];
@@ -261,7 +259,7 @@ export const EditProfile = ({ navigation }) => {
                 setMusic(updatedMusic);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={music[1]}
               onChangeText={(text) => {
                 let updatedMusic = [...music];
@@ -269,7 +267,7 @@ export const EditProfile = ({ navigation }) => {
                 setMusic(updatedMusic);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={music[2]}
               onChangeText={(text) => {
                 let updatedMusic = [...music];
@@ -277,7 +275,7 @@ export const EditProfile = ({ navigation }) => {
                 setMusic(updatedMusic);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={music[3]}
               onChangeText={(text) => {
                 let updatedMusic = [...music];
@@ -285,7 +283,7 @@ export const EditProfile = ({ navigation }) => {
                 setMusic(updatedMusic);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={music[4]}
               onChangeText={(text) => {
                 let updatedMusic = [...music];
@@ -295,7 +293,7 @@ export const EditProfile = ({ navigation }) => {
             />
           </List.Accordion>
           <List.Accordion title="Shows/Movies">
-            <TextInput
+            <EditProfileInput
               defaultValue={shows[0]}
               onChangeText={(text) => {
                 let updatedShows = [...shows];
@@ -303,7 +301,7 @@ export const EditProfile = ({ navigation }) => {
                 setShows(updatedShows);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={shows[1]}
               onChangeText={(text) => {
                 let updatedShows = [...shows];
@@ -311,7 +309,7 @@ export const EditProfile = ({ navigation }) => {
                 setShows(updatedShows);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={shows[2]}
               onChangeText={(text) => {
                 let updatedShows = [...shows];
@@ -319,7 +317,7 @@ export const EditProfile = ({ navigation }) => {
                 setShows(updatedShows);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={shows[3]}
               onChangeText={(text) => {
                 let updatedShows = [...shows];
@@ -327,7 +325,7 @@ export const EditProfile = ({ navigation }) => {
                 setShows(updatedShows);
               }}
             />
-            <TextInput
+            <EditProfileInput
               defaultValue={shows[4]}
               onChangeText={(text) => {
                 let updatedShows = [...shows];
@@ -337,10 +335,10 @@ export const EditProfile = ({ navigation }) => {
             />
           </List.Accordion>
         </List.Section>
-        <Button mode="contained" onPress={updateProfile}>
+        <SaveButton mode="contained" onPress={updateProfile}>
           Save
-        </Button>
+        </SaveButton>
       </ScrollView>
-    </>
+    </ScreenContainer>
   );
 };

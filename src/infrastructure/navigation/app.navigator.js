@@ -26,7 +26,7 @@ const screenOptions = ({ route }) => {
       <Ionicons name={iconName} size={size} color={color} />
     ),
     tabBarOptions: {
-      activeTintColor: `${(props) => props.theme.colors.brandBlue.primary}`,
+      activeTintColor: `${(props) => props.theme.colors.brandGreen.secondary}`,
       inactiveTintColot: `${(props) => props.theme.colors.ui.secondary}`,
     },
   };

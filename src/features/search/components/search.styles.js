@@ -16,6 +16,7 @@ export const ChipContainer = styled.View`
 
 export const ChipSpaced = styled(Chip)`
   margin: 5px;
+  background-color: ${(props) => props.theme.colors.brandGreen.muted};
 `;
 
 export const ResetChip = styled(Chip)`
