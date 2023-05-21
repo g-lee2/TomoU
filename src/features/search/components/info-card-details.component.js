@@ -164,10 +164,7 @@ export const InfoCardDetails = ({ route, navigation }) => {
         <Marker
           title={schoolName}
           pinColor="red"
-          coordinate={{
-            latitude: schoolLat,
-            longitude: schoolLong,
-          }}
+          coordinate={{ longitude: schoolLat, latitude: schoolLong }}
         />
       </MapView>
       {/* <AttendeesContainer>
