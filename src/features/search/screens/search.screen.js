@@ -11,7 +11,6 @@ import {
 } from "../components/search.styles";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../../firebase-config";
-import Icon from "react-native-vector-icons/Ionicons";
 
 export const SearchTab = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -122,6 +121,10 @@ export const SearchTab = ({ navigation }) => {
               onPress={() => {
                 navigation.navigate("School Details", {
                   schoolUrl: card.props.url,
+                  schoolName: card.props.name,
+                  schoolImage: card.props.image,
+                  schoolAddress: card.props.address,
+                  schoolId: index,
                 });
               }}
             >

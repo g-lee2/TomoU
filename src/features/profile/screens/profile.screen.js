@@ -45,35 +45,35 @@ export const ProfileTab = ({ navigation }) => {
         <ScrollView>
           <List.Section title="Resources">
             <List.Accordion title="Textbooks">
-              {priorProfile.textbooks
+              {priorProfile?.textbooks
                 ?.filter((value) => value)
                 .map((value, index) => (
                   <List.Item key={index} title={value} />
                 ))}
             </List.Accordion>
             <List.Accordion title="Podcast/Youtubers">
-              {priorProfile.influencers
+              {priorProfile?.influencers
                 ?.filter((value) => value)
                 .map((value, index) => (
                   <List.Item key={index} title={value} />
                 ))}
             </List.Accordion>
             <List.Accordion title="Books I Read">
-              {priorProfile.books
+              {priorProfile?.books
                 ?.filter((value) => value)
                 .map((value, index) => (
                   <List.Item key={index} title={value} />
                 ))}
             </List.Accordion>
             <List.Accordion title="Songs/Artists">
-              {priorProfile.music
+              {priorProfile?.music
                 ?.filter((value) => value)
                 .map((value, index) => (
                   <List.Item key={index} title={value} />
                 ))}
             </List.Accordion>
             <List.Accordion title="Shows/Movies">
-              {priorProfile.shows
+              {priorProfile?.shows
                 ?.filter((value) => value)
                 .map((value, index) => (
                   <List.Item key={index} title={value} />

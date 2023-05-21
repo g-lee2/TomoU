@@ -33,18 +33,6 @@ export const EditProfile = ({ navigation }) => {
         return;
       }
       const userRef = docs(db, "userProfiles", auth.currentUser.uid);
-      console.log({
-        name: name || "",
-        bio: bio || "",
-        textbooks: textbooks || [],
-        influencers: influencers || [],
-        books: books || [],
-        music: music || [],
-        shows: shows || [],
-        jlptLevel: jlptLevel || "",
-        livesInJapan: livesInJapan || false,
-        userId: auth.currentUser?.uid || "",
-      });
       await setDoc(
         userRef,
         {
@@ -61,7 +49,6 @@ export const EditProfile = ({ navigation }) => {
         },
         { merge: true }
       );
-      console.log("Profile updated successfully");
       navigation.goBack();
     } catch (error) {
       console.error("Error writing document: ", error);

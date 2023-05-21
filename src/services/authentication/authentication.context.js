@@ -5,16 +5,11 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { firebaseConfig, db } from "../../../firebase-config";
+import { db, auth, app } from "../../../firebase-config";
 
 export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [user, setUser] = useState(null);

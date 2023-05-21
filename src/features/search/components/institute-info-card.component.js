@@ -8,6 +8,7 @@ import {
   AddressView,
 } from "./info-card-styles.component";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Icon as Ionicon } from "react-native-vector-icons/Ionicons";
 
 export const InstituteInfoCard = ({ name, address, image }) => {
   return (
